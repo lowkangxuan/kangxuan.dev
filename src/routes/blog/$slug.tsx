@@ -10,6 +10,7 @@ export const Route = createFileRoute('/blog/$slug')({
         if (!post) {
             throw notFound()
         }
+        console.log(post);
         return post
     },
     component: BlogPost,

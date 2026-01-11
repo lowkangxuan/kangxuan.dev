@@ -5,8 +5,12 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import Header from "../components/Header";
 
 import appCss from "../styles.css?url";
+import { SiteHeader } from "@/components/site-header.tsx";
+import { ThemeProvider } from "@/components/theme-provider.tsx";
+import { getThemeServerFn } from "@/lib/theme.ts";
 
 export const Route = createRootRoute({
+    loader: () => getThemeServerFn(),
     head: () => ({
         meta: [
             {
@@ -32,25 +36,33 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+    const theme = Route.useLoaderData();
     return (
-        <html lang="en">
+        <html className={theme} lang="en">
             <head>
                 <HeadContent />
             </head>
             <body>
-                <Header />
-                {children}
-                <TanStackDevtools
-                    config={{
-                        position: "bottom-right",
-                    }}
-                    plugins={[
-                        {
-                            name: "Tanstack Router",
-                            render: <TanStackRouterDevtoolsPanel />,
-                        },
-                    ]}
-                />
+                <ThemeProvider theme={theme}>
+                    <main className="max-w-dvw px-2">
+                        <div className="md:max-w-4xl mx-auto">
+                            {/*<Header />*/}
+                            <SiteHeader />
+                            {children}
+                            <TanStackDevtools
+                                config={{
+                                    position: "bottom-right",
+                                }}
+                                plugins={[
+                                    {
+                                        name: "Tanstack Router",
+                                        render: <TanStackRouterDevtoolsPanel />,
+                                    },
+                                ]}
+                            />
+                        </div>
+                    </main>
+                </ThemeProvider>
                 <Scripts />
             </body>
         </html>

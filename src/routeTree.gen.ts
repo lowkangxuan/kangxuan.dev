@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TestIndexRouteImport } from './routes/test/index'
+import { Route as ShowcaseIndexRouteImport } from './routes/showcase/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as TestIdRouteImport } from './routes/test/$id'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
@@ -30,6 +31,11 @@ const IndexRoute = IndexRouteImport.update({
 const TestIndexRoute = TestIndexRouteImport.update({
   id: '/test/',
   path: '/test/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShowcaseIndexRoute = ShowcaseIndexRouteImport.update({
+  id: '/showcase/',
+  path: '/showcase/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
@@ -88,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/test/$id': typeof TestIdRoute
   '/blog': typeof BlogIndexRoute
+  '/showcase': typeof ShowcaseIndexRoute
   '/test': typeof TestIndexRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
@@ -102,6 +109,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/test/$id': typeof TestIdRoute
   '/blog': typeof BlogIndexRoute
+  '/showcase': typeof ShowcaseIndexRoute
   '/test': typeof TestIndexRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
@@ -117,6 +125,7 @@ export interface FileRoutesById {
   '/blog/$slug': typeof BlogSlugRoute
   '/test/$id': typeof TestIdRoute
   '/blog/': typeof BlogIndexRoute
+  '/showcase/': typeof ShowcaseIndexRoute
   '/test/': typeof TestIndexRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
@@ -133,6 +142,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/test/$id'
     | '/blog'
+    | '/showcase'
     | '/test'
     | '/demo/api/names'
     | '/demo/start/api-request'
@@ -147,6 +157,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/test/$id'
     | '/blog'
+    | '/showcase'
     | '/test'
     | '/demo/api/names'
     | '/demo/start/api-request'
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/test/$id'
     | '/blog/'
+    | '/showcase/'
     | '/test/'
     | '/demo/api/names'
     | '/demo/start/api-request'
@@ -176,6 +188,7 @@ export interface RootRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
   TestIdRoute: typeof TestIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  ShowcaseIndexRoute: typeof ShowcaseIndexRoute
   TestIndexRoute: typeof TestIndexRoute
   DemoApiNamesRoute: typeof DemoApiNamesRoute
   DemoStartApiRequestRoute: typeof DemoStartApiRequestRoute
@@ -200,6 +213,13 @@ declare module '@tanstack/react-router' {
       path: '/test'
       fullPath: '/test'
       preLoaderRoute: typeof TestIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/showcase/': {
+      id: '/showcase/'
+      path: '/showcase'
+      fullPath: '/showcase'
+      preLoaderRoute: typeof ShowcaseIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
@@ -280,6 +300,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
   TestIdRoute: TestIdRoute,
   BlogIndexRoute: BlogIndexRoute,
+  ShowcaseIndexRoute: ShowcaseIndexRoute,
   TestIndexRoute: TestIndexRoute,
   DemoApiNamesRoute: DemoApiNamesRoute,
   DemoStartApiRequestRoute: DemoStartApiRequestRoute,
