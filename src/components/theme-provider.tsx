@@ -1,20 +1,34 @@
-import { useRouter } from "@tanstack/react-router";
-import { createContext, type PropsWithChildren, use } from "react";
-import { setThemeServerFn, type T as Theme } from "@/lib/theme";
+// components/theme-provider.tsx
+import { createContext, type PropsWithChildren, use, useEffect, useMemo, useState } from "react";
+import type {T as Theme} from "@/lib/theme";
+import { setThemeServerFn  } from "@/lib/theme";
 
 type ThemeContextVal = { theme: Theme; setTheme: (val: Theme) => void };
-type Props = PropsWithChildren<{ theme: Theme }>;
-
 const ThemeContext = createContext<ThemeContextVal | null>(null);
 
-export function ThemeProvider({ children, theme }: Props) {
-    const router = useRouter();
+function applyThemeClass(theme: Theme) {
+    const root = document.documentElement;
+    root.classList.remove("light", "dark");
+    root.classList.add(theme);
+}
 
-    function setTheme(val: Theme) {
-        setThemeServerFn({ data: val }).then(() => router.invalidate());
-    }
+export function ThemeProvider({ children, theme: initialTheme }: PropsWithChildren<{ theme: Theme }>) {
+    const [theme, setThemeState] = useState<Theme>(initialTheme);
 
-    return <ThemeContext value={{ theme, setTheme }}>{children}</ThemeContext>;
+    useEffect(() => {
+        applyThemeClass(theme);
+    }, [theme]);
+
+    const setTheme = (next: Theme) => {
+        setThemeState(next);
+
+        void setThemeServerFn({ data: next }).catch(() => {
+            setThemeState(prev => prev === "light" ? "dark" : "light");
+        });
+    };
+
+    const value = useMemo(() => ({ theme, setTheme }), [theme]);
+    return <ThemeContext value={value}>{children}</ThemeContext>;
 }
 
 export function useTheme() {
