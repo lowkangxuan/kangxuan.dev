@@ -1,33 +1,40 @@
+import { data } from "./data.ts";
 import { Panel } from "@/components/Panel.tsx";
 import { PanelHeader } from "@/components/PanelHeader.tsx";
-import { data } from "./data.ts";
 import { PanelSection } from "@/components/PanelSection.tsx";
-import { Button } from "@/components/ui/button.tsx";
+import {
+    Timeline,
+    TimelineContent,
+    TimelineDuration,
+    TimelineHeader, TimelineSkillset,
+    TimelineSubheader,
+} from "@/components/Timeline";
 
 export function Experience() {
     return (
         <Panel>
             <PanelHeader>Experience</PanelHeader>
-            {data.map((experience) => {
-                return (
-                    <PanelSection>
-                        <h3>{experience.company}</h3>
-                        <Button variant="ghost">
-                            {experience.role}
-                            {experience.status}
-                            {experience.duration}
-                        </Button>
-                        <div>
-                            {experience.description}
-                        </div>
-                        <div>
-                            {experience.techs.map((tech) => {
-                                return tech;
-                            })}
-                        </div>
-                    </PanelSection>
-                );
-            })}
+            <PanelSection >
+                <Timeline>
+                    {data.map((experience) => {
+                        return (
+                            <TimelineContent key={experience.name}>
+                                <TimelineHeader>
+                                    {experience.name}
+                                </TimelineHeader>
+                                <TimelineSubheader>
+                                    {experience.status} {experience.role}
+                                    <TimelineDuration
+                                        from={experience.from}
+                                        to={experience.to}
+                                    />
+                                </TimelineSubheader>
+                                <TimelineSkillset skills={experience.skills} />
+                            </TimelineContent>
+                        );
+                    })}
+                </Timeline>
+            </PanelSection>
         </Panel>
     );
 }

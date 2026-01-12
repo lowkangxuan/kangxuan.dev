@@ -1,28 +1,24 @@
-type ExperienceData = {
-    company: string,
-    status: string,
-    role: string,
-    duration: string,
-    description: string,
-    techs: Array<string>,
-}
+import type { ExperienceData } from "@/type/GenericTypes";
 
 export const data: Array<ExperienceData> = [
     {
-        company: "Trueworld Studios",
+        name: "Trueworld Studios",
         status: "Intern",
-        duration: "09.2022 - 04.2023",
+        from: "09.2022",
+        to: "04.2023",
         role: "Game Developer",
-        description: `Development Studios
-        - TEsting`,
-        techs: ["Unreal Engine 5"],
+        description: `
+- Development Studios
+- TEsting`,
+        skills: ["Unreal Engine 5", "Adobe Photoshop"],
     },
     {
-        company: "HelleHolo",
+        name: "HelleHolo",
         status: "Intern",
-        duration: "02.2021 - 03.2021",
+        from: "02.2021",
+        to: "03.2021",
         role: "Mixed Reality",
         description: "Development Studios",
-        techs: ["Unity Game Engine", "VS Code"],
+        skills: ["Unity Game Engine"],
     }
 ];

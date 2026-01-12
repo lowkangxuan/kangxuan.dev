@@ -1,10 +1,8 @@
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
-
-import Header from "../components/Header";
-
-import appCss from "../styles.css?url";
+import * as React from "react";
+import appCss from "@/styles.css?url";
 import { SiteHeader } from "@/components/site-header.tsx";
 import { ThemeProvider } from "@/components/theme-provider.tsx";
 import { getThemeServerFn } from "@/lib/theme.ts";
@@ -55,7 +53,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             <body>
                 <ThemeProvider theme={theme}>
                     <SiteHeader />
-                    <main className="max-w-dvw px-2">
+                    <main className="max-w-dvw px-2 overflow-x-hidden">
                         <div className="md:max-w-3xl mx-auto">
                             {children}
                             <TanStackDevtools
