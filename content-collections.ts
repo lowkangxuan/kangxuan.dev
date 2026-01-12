@@ -1,38 +1,32 @@
-// content-collections.ts
-import { defineCollection, defineConfig } from '@content-collections/core'
-import matter from 'gray-matter'
-import { z } from 'zod'
-
-function extractFrontMatter(content: string) {
-    const { data, content: body, excerpt } = matter(content, { excerpt: true })
-    return { data, body, excerpt: excerpt || '' }
-}
+import { remarkPlugins } from '@prose-ui/core'
+import { defineCollection, defineConfig } from "@content-collections/core";
+import { compileMDX } from "@content-collections/mdx";
+import { z } from "zod";
 
 const posts = defineCollection({
-    name: 'posts',
-    directory: './src/blog',
-    include: '**/*.md',
+    name: "posts",
+    directory: "./src/blog",
+    include: "**/*.mdx",
     schema: z.object({
         title: z.string(),
         published: z.string().date(),
         description: z.string().optional(),
         authors: z.array(z.string()),
+        category: z.string().optional(),
         content: z.string(),
     }),
-    transform: ({ content, ...post }) => {
-        const headerImageMatch = content.match(/!\[([^\]]*)\]\(([^)]+)\)/)
-        const headerImage = headerImageMatch ? headerImageMatch[2] : undefined
-
+    transform: async (document, context) => {
+        const mdx = await compileMDX(context, document, {
+            remarkPlugins: remarkPlugins(),
+        })
         return {
-            ...post,
-            slug: post._meta.path,
-            headerImage,
-            // keep full markdown in content (or render as MD)
-            content,
-        }
+            ...document,
+            slug: document._meta.path,
+            mdx,
+        };
     },
-})
+});
 
 export default defineConfig({
     collections: [posts],
-})
+});

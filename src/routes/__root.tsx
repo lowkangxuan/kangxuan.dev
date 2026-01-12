@@ -41,13 +41,22 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <html className={theme} lang="en">
             <head>
                 <HeadContent />
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossOrigin="anonymous"
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+                    rel="stylesheet"
+                />
             </head>
             <body>
                 <ThemeProvider theme={theme}>
+                    <SiteHeader />
                     <main className="max-w-dvw px-2">
-                        <div className="md:max-w-4xl mx-auto">
-                            {/*<Header />*/}
-                            <SiteHeader />
+                        <div className="md:max-w-3xl mx-auto">
                             {children}
                             <TanStackDevtools
                                 config={{

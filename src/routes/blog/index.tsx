@@ -20,7 +20,7 @@ function BlogIndex() {
                     <li key={post.slug}>
                         <Link to="/blog/$slug" params={{ slug: post.slug }}>
                             <h2>{post.title}</h2>
-                            <p>{post.excerpt}</p>
+                            {/*<p>{post.excerpt}</p>*/}
                             <span>{post.published}</span>
                         </Link>
                     </li>
