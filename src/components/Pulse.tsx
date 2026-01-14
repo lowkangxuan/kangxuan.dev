@@ -1,5 +1,5 @@
 export function Pulse({size=2, colour="green"}: {size?: number; colour?: string}) {
-    const pulseColour = `bg-${colour}-500`;
+    const pulseColour = `bg-green-500`;
 
     return (
         <span className="relative inline-flex items-center justify-center">

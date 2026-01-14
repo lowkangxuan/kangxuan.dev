@@ -1,12 +1,11 @@
 import { data } from "./data.ts";
-import { Panel } from "@/components/Panel.tsx";
-import { PanelHeader } from "@/components/PanelHeader.tsx";
-import { PanelSection } from "@/components/PanelSection.tsx";
+import { Panel, PanelHeader, PanelSection } from "@/components/Panel";
 import {
     Timeline,
     TimelineContent,
     TimelineDuration,
-    TimelineHeader, TimelineSkillset,
+    TimelineHeader,
+    TimelineSkillset,
     TimelineSubheader,
 } from "@/components/Timeline";
 
@@ -14,7 +13,7 @@ export function Experience() {
     return (
         <Panel>
             <PanelHeader>Experience</PanelHeader>
-            <PanelSection >
+            <PanelSection>
                 <Timeline>
                     {data.map((experience) => {
                         return (

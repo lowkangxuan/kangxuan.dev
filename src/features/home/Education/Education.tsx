@@ -1,12 +1,11 @@
 import { data } from "./data.ts";
-import { Panel } from "@/components/Panel.tsx";
-import { PanelHeader } from "@/components/PanelHeader.tsx";
-import { PanelSection } from "@/components/PanelSection.tsx";
+import { Panel, PanelHeader, PanelSection } from "@/components/Panel";
 import {
     Timeline,
     TimelineContent,
     TimelineDuration,
-    TimelineHeader, TimelineSkillset,
+    TimelineHeader,
+    TimelineSkillset,
     TimelineSubheader,
 } from "@/components/Timeline";
 import { Pulse } from "@/components/Pulse.tsx";
@@ -21,7 +20,8 @@ export function Education() {
                         return (
                             <TimelineContent key={education.name}>
                                 <TimelineHeader>
-                                    {education.name} {education.to === "present" && <Pulse />}
+                                    {education.name}{" "}
+                                    {education.to === "present" && <Pulse />}
                                 </TimelineHeader>
                                 <TimelineSubheader>
                                     {education.course}

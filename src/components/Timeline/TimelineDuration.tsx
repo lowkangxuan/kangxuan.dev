@@ -5,7 +5,7 @@ export function TimelineDuration({from, to}: {from: string, to: string}) {
         <span>
             {from} —{" "}
             {to === "present" ? (
-                <Infinity className="inline size-6" />
+                <Infinity className="inline size-5" />
             ) : (
                 to
             )}
