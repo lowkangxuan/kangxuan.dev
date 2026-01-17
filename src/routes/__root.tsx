@@ -2,7 +2,7 @@ import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import * as React from "react";
-import appCss from "../styles.css?url";
+import appCss from "@/styles.css?url";
 import { SiteHeader } from "@/components/site-header.tsx";
 import { ThemeProvider } from "@/components/theme-provider.tsx";
 import { themeScript } from "@/integrations/theme/scripts";

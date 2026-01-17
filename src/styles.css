@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 @import "@prose-ui/style/prose-ui.css";
 @import "@prose-ui/style/katex.min.css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -139,7 +140,7 @@ code {
     }
 }
 
-@layer utility {
+@layer utilities {
     .line-before {
         position: relative;
     }
