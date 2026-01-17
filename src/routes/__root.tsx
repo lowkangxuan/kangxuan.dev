@@ -10,8 +10,8 @@ import { THEME_COOKIE_NAME } from "@/integrations/theme/constants";
 import { getThemeFromCookie } from "@/integrations/theme/utils";
 
 export const Route = createRootRoute({
-    loader: () => {
-        const theme = getThemeFromCookie();
+    loader: async () => {
+        const theme = (await getThemeFromCookie()) ?? "light";
         return { theme };
     },
     head: () => ({
@@ -40,46 +40,46 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-    const theme = Route.useLoaderData();
+    const { theme } = Route.useLoaderData();
     return (
-        <html className={`antialiased ${theme}`} lang="en">
-        <head>
-            <HeadContent />
-            <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link
-                rel="preconnect"
-                href="https://fonts.gstatic.com"
-                crossOrigin="anonymous"
-            />
-            <link
-                href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
-                rel="stylesheet"
-            />
-            <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        </head>
-        <body>
-            <ThemeProvider
-                defaultTheme="system"
-                storageKey={THEME_COOKIE_NAME}
-            >
-                <SiteHeader />
-                <main className="max-w-dvw px-2 overflow-x-hidden">
-                    <div className="md:max-w-3xl mx-auto">{children}</div>
-                </main>
-            </ThemeProvider>
-            <TanStackDevtools
-                config={{
-                    position: "bottom-right",
-                }}
-                plugins={[
-                    {
-                        name: "Tanstack Router",
-                        render: <TanStackRouterDevtoolsPanel />,
-                    },
-                ]}
-            />
-            <Scripts />
-        </body>
+        <html className={`antialiased ${theme ?? ""}`} lang="en">
+            <head>
+                <HeadContent />
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossOrigin="anonymous"
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+                    rel="stylesheet"
+                />
+                <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+            </head>
+            <body>
+                <ThemeProvider
+                    defaultTheme="system"
+                    storageKey={THEME_COOKIE_NAME}
+                >
+                    <SiteHeader />
+                    <main className="max-w-dvw px-2 overflow-x-hidden">
+                        <div className="md:max-w-3xl mx-auto">{children}</div>
+                    </main>
+                </ThemeProvider>
+                <TanStackDevtools
+                    config={{
+                        position: "bottom-right",
+                    }}
+                    plugins={[
+                        {
+                            name: "Tanstack Router",
+                            render: <TanStackRouterDevtoolsPanel />,
+                        },
+                    ]}
+                />
+                <Scripts />
+            </body>
         </html>
     );
 }

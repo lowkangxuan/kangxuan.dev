@@ -1,36 +1,34 @@
 import Markdown from "react-markdown";
 import img from "./cover.jpeg";
-import { PanelSection } from "@/components/Panel";
+import { Panel, PanelSection } from "@/components/Panel";
+import { MapPin } from "lucide-react";
+import { CurrentTime } from "@/components/CurrentTime.tsx";
 
 export function Profile() {
     return (
-        <div className="border-x">
-            <div className="flex line-after">
-                <div className="mx-0.5 my-0.75">
-                    <img
-                        src={img}
-                        alt="cover"
-                        className="inline-block size-48 rounded-full ring-1 ring-border ring-offset-2 ring-offset-background"
-                    />
-                </div>
-                <div className="flex flex-col items-stretch justify-end flex-1 border-l">
-                    <h1 className="font-bold text-3xl p-2 border-y tracking-tight">
+        <Panel>
+            <PanelSection className="flex gap-2">
+                <img
+                    src={img}
+                    alt="cover"
+                    className="inline-block size-36 rounded-2xl p-1 border"
+                />
+                <div className="flex flex-col self-end gap-1">
+                    <h1 className="font-bold text-3xl tracking-tight">
                         Low Kang Xuan
                     </h1>
-                    <span className="px-2">
-                        @bongkongkang
+                    <span className="flex gap-3 text-primary/70 text-sm">
+                        <span className="flex items-center gap-1.5"><MapPin className="inline" size="18" /> Singapore</span>
+                        <span>|</span>
+                        <span><CurrentTime /></span>
                     </span>
                 </div>
-            </div>
+            </PanelSection>
             <PanelSection className="px-4">
-                <div className="prose text-sm">
-                    <Markdown>{`
-- Computer Science undergraduate with a strong passion in **frontend** and **software engineering**.
-- Using **React** and **Typescript** to build responsive and user-centered web applications.
-- Exploring **Game Design & Development** as a creative side pursuit.
-                `}</Markdown>
+                <div className="text-sm text-primary/70">
+                    <span className="tracking-tight">Hey! I'm Kang Xuan, student in the day, working on projects in the night</span>
                 </div>
             </PanelSection>
-        </div>
+        </Panel>
     );
 }
