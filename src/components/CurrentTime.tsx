@@ -63,7 +63,7 @@ export function CurrentTime() {
         timeZone,
         "HH:mm:ss zzz",
     );
-    const ClockElem = clockIcons[getHours(currentTime)] ?? Clock4;
+    const ClockElem = clockIcons[getHours(currentTime) % 12] ?? Clock4;
 
     return (
         <span className="flex items-center gap-1.5">

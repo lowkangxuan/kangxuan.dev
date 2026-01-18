@@ -3,7 +3,9 @@ import { Experience } from "@/features/home/Experience/Experience.tsx";
 import { Education } from "@/features/home/Education/Education.tsx";
 import { Profile } from "@/features/home/Profile/Profile.tsx";
 
-export const Route = createFileRoute("/")({ component: App });
+export const Route = createFileRoute("/")({
+    component: App,
+});
 
 function App() {
     return (
