@@ -10,6 +10,8 @@ export const Route = createFileRoute("/")({
 function App() {
     return (
         <div>
+            <div className="relative h-40 border-x before:absolute before:h-40 before:w-[200dvw] before:left-0 before:bg-[radial-gradient(var(--border)_1.2px,transparent_0)] before:bg-size-[14px_14px] before:bg-position-[0px_4.5px]">
+            </div>
             <Profile />
             <Separator />
 

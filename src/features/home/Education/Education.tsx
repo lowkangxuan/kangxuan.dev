@@ -2,13 +2,8 @@ import { data } from "./data.ts";
 import { Panel, PanelHeader, PanelSection } from "@/components/Panel";
 import {
     Timeline,
-    TimelineContent,
-    TimelineDuration,
-    TimelineHeader,
-    TimelineSkillset,
-    TimelineSubheader,
+    TimelineItemCollapsible,
 } from "@/components/Timeline";
-import { Pulse } from "@/components/Pulse.tsx";
 
 export function Education() {
     return (
@@ -18,20 +13,14 @@ export function Education() {
                 <Timeline>
                     {data.map((education) => {
                         return (
-                            <TimelineContent key={education.name}>
-                                <TimelineHeader>
-                                    {education.name}{" "}
-                                    {education.to === "present" && <Pulse />}
-                                </TimelineHeader>
-                                <TimelineSubheader>
-                                    {education.course}
-                                    <TimelineDuration
-                                        from={education.from}
-                                        to={education.to}
-                                    />
-                                </TimelineSubheader>
-                                <TimelineSkillset skills={education.skills} />
-                            </TimelineContent>
+                            <TimelineItemCollapsible
+                                title={education.name}
+                                meta={education.course}
+                                from={education.from}
+                                to={education.to}
+                                description={education.description}
+                                skills={education.skills}
+                            />
                         );
                     })}
                 </Timeline>

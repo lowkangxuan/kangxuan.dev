@@ -11,22 +11,43 @@ export function Profile() {
                 <img
                     src={img}
                     alt="cover"
-                    className="inline-block size-36 rounded-2xl p-1 border"
+                    className="inline-block absolute top-0 -translate-y-1/2 size-38 bg-background border rounded-2xl p-1"
                 />
-                <div className="flex flex-col self-end gap-1">
+                <div className="flex flex-col self-end gap-0 pl-40">
                     <h1 className="font-bold text-3xl tracking-tight">
                         Low Kang Xuan
                     </h1>
                     <span className="flex gap-3 text-primary/70 text-sm">
-                        <span className="flex items-center gap-1.5"><MapPin className="inline" size="18" /> Singapore</span>
+                        <span className="flex items-center gap-1.5">
+                            <MapPin className="inline" size="18" /> Singapore
+                        </span>
                         <span>|</span>
-                        <span><CurrentTime /></span>
+                        <span>
+                            <CurrentTime />
+                        </span>
                     </span>
                 </div>
             </PanelSection>
-            <PanelSection className="px-4">
-                <div className="text-sm text-primary/70">
-                    <span className="tracking-tight">Hey! I'm Kang Xuan, student in the day, working on projects in the night</span>
+            <PanelSection className="">
+                <div className="text-sm text-primary">
+                    <span className="tracking-tight">
+                        <p>
+                            Hey! I'm Kang Xuan, a Computer Science student by
+                            day and a project builder by night.
+                        </p>
+                        <br />
+                        <p>
+                            I spend my free time enjoying the process of
+                            developing responsive web applications using React
+                            and Typescript.
+                        </p>
+                        <br />
+                        <p>
+                            My past experience in the games industry has also
+                            led me to explore game design and development
+                            outside of web work.
+                        </p>
+                    </span>
                 </div>
             </PanelSection>
         </Panel>

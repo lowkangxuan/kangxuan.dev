@@ -1,13 +1,15 @@
+/// <reference types="vite/client" />
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import * as React from "react";
 import appCss from "@/styles.css?url";
-import { SiteHeader } from "@/components/site-header.tsx";
+import { SiteHeader } from "@/components/SiteHeader.tsx";
 import { ThemeProvider } from "@/components/theme-provider.tsx";
 import { themeScript } from "@/integrations/theme/scripts";
 import { THEME_COOKIE_NAME } from "@/integrations/theme/constants";
 import { getThemeFromCookie } from "@/integrations/theme/utils";
+import { SiteFooter } from "@/components/SiteFooter.tsx";
 
 export const Route = createRootRoute({
     loader: async () => {
@@ -63,9 +65,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                     storageKey={THEME_COOKIE_NAME}
                 >
                     <SiteHeader />
-                    <main className="max-w-dvw px-2 overflow-x-hidden">
+                    <main className="max-w-dvw px-2 overflow-hidden">
                         <div className="md:max-w-3xl mx-auto">{children}</div>
                     </main>
+                    <SiteFooter />
                 </ThemeProvider>
                 <TanStackDevtools
                     config={{

@@ -2,11 +2,7 @@ import { data } from "./data.ts";
 import { Panel, PanelHeader, PanelSection } from "@/components/Panel";
 import {
     Timeline,
-    TimelineContent,
-    TimelineDuration,
-    TimelineHeader,
-    TimelineSkillset,
-    TimelineSubheader,
+    TimelineItemCollapsible,
 } from "@/components/Timeline";
 
 export function Experience() {
@@ -17,19 +13,13 @@ export function Experience() {
                 <Timeline>
                     {data.map((experience) => {
                         return (
-                            <TimelineContent key={experience.name}>
-                                <TimelineHeader>
-                                    {experience.name}
-                                </TimelineHeader>
-                                <TimelineSubheader>
-                                    {experience.status} {experience.role}
-                                    <TimelineDuration
-                                        from={experience.from}
-                                        to={experience.to}
-                                    />
-                                </TimelineSubheader>
-                                <TimelineSkillset skills={experience.skills} />
-                            </TimelineContent>
+                            <TimelineItemCollapsible title={experience.name}
+                                                     meta={`${experience.status} | ${experience.role}`}
+                                                     from={experience.from}
+                                                     to={experience.to}
+                                                     description={experience.description}
+                                                     skills={experience.skills}
+                            />
                         );
                     })}
                 </Timeline>
