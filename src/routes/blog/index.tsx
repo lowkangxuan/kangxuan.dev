@@ -1,31 +1,27 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { allPosts } from 'content-collections'
+import { sortedPosts } from "@/data/sorted-posts.ts";
+import { Panel } from "@/components/Panel";
 
-export const Route = createFileRoute('/blog/')({
+export const Route = createFileRoute("/blog/")({
     component: BlogIndex,
-})
+});
 
 function BlogIndex() {
-    // Posts are sorted by published date
-    console.log('allPosts', allPosts);
-    const sortedPosts = allPosts.sort(
-        (a, b) => new Date(b.published).getTime() - new Date(a.published).getTime()
-    )
-
     return (
-        <div>
+        <Panel>
             <h1>Blog</h1>
-            <ul>
+            <div className="relative grid grid-cols-2 gap-2">
                 {sortedPosts.map((post) => (
-                    <li key={post.slug}>
-                        <Link to="/blog/$slug" params={{ slug: post.slug }}>
+                    <div key={post.slug} className="p-4 odd:line-before odd:line-after">
+                        <Link to="/blog/$slug" params={{ slug: post.slug }} className="flex flex-col gap-2">
+                            <div className="rounded-lg border-primary ring ring-primary/30 ring-offset-4 ring-offset-background">
+                                <img src={post.thumbnailUrl} alt="" className="rounded-lg" />
+                            </div>
                             <h2>{post.title}</h2>
-                            {/*<p>{post.excerpt}</p>*/}
-                            <span>{post.published}</span>
                         </Link>
-                    </li>
+                    </div>
                 ))}
-            </ul>
-        </div>
-    )
+            </div>
+        </Panel>
+    );
 }

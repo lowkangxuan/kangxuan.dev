@@ -22,7 +22,6 @@ export function SiteHeader() {
     return (
         <header className="sticky p-2 pb-0 overflow-x-hidden">
             <div className="line-before line-after flex items-center justify-between gap-4 border-x px-4 py-3 mx-auto max-w-3xl">
-                <div className="flex-1"></div>
                 <nav className="flex gap-4 max-sm:hidden">
                     {navLinks.map((nav) => {
                         return (

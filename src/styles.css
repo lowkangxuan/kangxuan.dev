@@ -140,33 +140,15 @@ code {
     }
 }
 
-@layer utilities {
-    .line-before {
-        position: relative;
-    }
+@utility line-before {
+    @apply relative before:absolute before:bg-border before:h-px before:w-[200dvw] before:-left-[100dvw] before:top-0;
+}
 
-    .line-before::before {
-        content: "";
-        position: absolute;
-        background-color: var(--border);
-        height: 1px;
-        width: 200dvw;
-        left: -100dvw;
-        top: 0;
-    }
+@utility line-after {
+    @apply relative after:absolute after:bg-border after:h-px after:w-[200dvw] after:-left-[100dvw] after:bottom-0;
+}
 
-    .line-after {
-        position: relative;
-    }
-
-    .line-after::after {
-        content: "";
-        position: absolute;
-        background-color: var(--border);
-        height: 1px;
-        width: 200dvw;
-        left: -100dvw;
-        bottom: 0;
-    }
+.react-activity-calendar__calendar rect {
+    @apply !stroke-primary/10;
 }
 

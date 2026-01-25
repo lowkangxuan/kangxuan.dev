@@ -8,8 +8,10 @@ const posts = defineCollection({
     directory: "./src/blog",
     include: "**/*.mdx",
     schema: z.object({
+        pinned: z.boolean().default(false),
         title: z.string(),
         published: z.string().date(),
+        thumbnail: z.string().optional(),
         description: z.string().optional(),
         authors: z.array(z.string()),
         category: z.string().optional(),
@@ -23,6 +25,9 @@ const posts = defineCollection({
             ...document,
             slug: document._meta.path,
             mdx,
+            thumbnailUrl: document.thumbnail
+                ? `/blog/${document._meta.directory}/${document.thumbnail.replace('./', '')}`
+                : undefined,
         };
     },
 });

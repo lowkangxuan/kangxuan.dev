@@ -2,6 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Experience } from "@/features/home/Experience/Experience.tsx";
 import { Education } from "@/features/home/Education/Education.tsx";
 import { Profile } from "@/features/home/Profile/Profile.tsx";
+import { GithubInfo } from "@/features/home/GithubInfo.tsx";
+import { DitheredBackground } from "@/components/DitheredBackground.tsx";
+import { BlogSection } from "@/features/home/BlogSection.tsx";
 
 export const Route = createFileRoute("/")({
     component: App,
@@ -10,15 +13,20 @@ export const Route = createFileRoute("/")({
 function App() {
     return (
         <div>
-            <div className="relative h-40 border-x before:absolute before:h-40 before:w-[200dvw] before:left-0 before:bg-[radial-gradient(var(--border)_1.2px,transparent_0)] before:bg-size-[14px_14px] before:bg-position-[0px_4.5px]">
-            </div>
+            <DitheredBackground />
             <Profile />
+            <Separator />
+
+            <GithubInfo />
             <Separator />
 
             <Experience />
             <Separator />
 
             <Education />
+            <Separator />
+
+            <BlogSection />
         </div>
     );
 }

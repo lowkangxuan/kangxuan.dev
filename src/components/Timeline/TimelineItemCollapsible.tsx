@@ -22,8 +22,8 @@ interface TimelineItemCollapsibleProps {
 
 export function TimelineItemCollapsible({title, meta, from, to, description, skills} : TimelineItemCollapsibleProps) {
     return (
-        <Collapsible className="flex flex-col not-first:mt-4 text-sm text-primary/70 last:before:absolute last:before:h-full last:before:w-px last:before:bg-background last:before:left-3 last:before:-z-20">
-            <CollapsibleTrigger className="relative flex-1 w-full before:absolute before:-top-1 before:-bottom-1 before:left-8 before:right-0 before:rounded-md before:-z-10 hover:before:bg-muted">
+        <Collapsible className="flex flex-col not-first:mt-4 text-sm text-muted-foreground last:before:absolute last:before:h-full last:before:w-px last:before:bg-background last:before:left-3 last:before:-z-20">
+            <CollapsibleTrigger className="group relative flex-1 w-full before:absolute before:-top-1 before:-bottom-1 before:left-8 before:-right-2 before:rounded-md before:-z-10 hover:before:bg-muted">
                 <TimelineContent>
                     <TimelineHeader>
                         {title}{" "}

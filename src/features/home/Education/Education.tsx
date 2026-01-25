@@ -14,6 +14,7 @@ export function Education() {
                     {data.map((education) => {
                         return (
                             <TimelineItemCollapsible
+                                key={education.name}
                                 title={education.name}
                                 meta={education.course}
                                 from={education.from}
