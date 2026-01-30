@@ -1,0 +1,11 @@
+import { MDXContent } from "@content-collections/mdx/react";
+import remarkCodeBlock from "@prose-ui/core/remark-code-block";
+
+const components = {
+    h1: (props) => <h1 className="text-3xl font-bold" {...props} />,
+    h2: (props) => <h2 className="text-3xl font-bold" {...props} />,
+};
+
+export function MDX({content} : {content: string}) {
+    return <MDXContent code={content} components={components} />;
+}

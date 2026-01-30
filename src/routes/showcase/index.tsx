@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { DitheredBackground } from "@/components/DitheredBackground.tsx";
+import { DitheredBackground } from "@/components/dithered-background.tsx";
 import { Panel } from "@/components/Panel";
 
 export const Route = createFileRoute('/showcase/')({

@@ -1,4 +1,3 @@
-import Markdown from "react-markdown";
 import img from "./cover.jpeg";
 import { Panel, PanelSection } from "@/components/Panel";
 import { MapPin } from "lucide-react";

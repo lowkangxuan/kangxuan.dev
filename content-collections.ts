@@ -13,8 +13,7 @@ const posts = defineCollection({
         published: z.string().date(),
         thumbnail: z.string().optional(),
         description: z.string().optional(),
-        authors: z.array(z.string()),
-        category: z.string().optional(),
+        tags: z.array(z.string()).optional(),
         content: z.string(),
     }),
     transform: async (document, context) => {
@@ -23,7 +22,8 @@ const posts = defineCollection({
         })
         return {
             ...document,
-            slug: document._meta.path,
+            slug: document._meta.path.split('/').pop()!,
+            fullPath: document._meta.path,
             mdx,
             thumbnailUrl: document.thumbnail
                 ? `/blog/${document._meta.directory}/${document.thumbnail.replace('./', '')}`
