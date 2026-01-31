@@ -16,6 +16,7 @@ export function Education() {
                             <TimelineItemCollapsible
                                 key={education.name}
                                 title={education.name}
+                                logo={education.logo}
                                 meta={education.course}
                                 from={education.from}
                                 to={education.to}

@@ -3,6 +3,7 @@ import type { EducationData } from "@/type/GenericTypes.ts";
 export const data: Array<EducationData> = [
     {
         name: "Nanyang Technological University",
+        logo: "education/NTU.png",
         course: "Bachelor Degree in Computer Science",
         from: "08.2025",
         to: "present",
@@ -10,6 +11,7 @@ export const data: Array<EducationData> = [
     },
     {
         name: "Ngee Ann Polytechnic",
+        logo: "/education/NP.png",
         course: "Diploma in Immersive Media",
         from: "04.2020",
         to: "04.2023",

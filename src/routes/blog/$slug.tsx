@@ -69,12 +69,12 @@ function PostPage() {
                     <PanelHeader className="flex flex-col gap-1">
                         {page.title}
                     </PanelHeader>
-                    <PanelSection className="prose-ui dark:bg-background">
-                        {/*<MDX content={page.mdx} />*/}
-                        <MDXContent
-                            code={page.mdx}
-                            components={mdxComponents}
-                        />
+                    <PanelSection className="dark:bg-background">
+                        <MDX content={page.mdx} />
+                        {/*<MDXContent*/}
+                        {/*    code={page.mdx}*/}
+                        {/*    components={mdxComponents}*/}
+                        {/*/>*/}
                     </PanelSection>
                 </article>
             </Panel>

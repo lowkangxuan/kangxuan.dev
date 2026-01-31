@@ -15,18 +15,18 @@ export function GithubInfo() {
                             "var(--color-primary)",
                         ],
                     }}
-                    tooltips={{
-                        activity: {
-                            text: activity => `${activity.level} contributions on ${activity.date}`,
-                            placement: 'top',
-                            offset: 6,
-                            hoverRestMs: 300,
-                            transitionStyles: {
-                                duration: 100,
-                            },
-                            withArrow: true,
-                        },
-                    }}
+                    // tooltips={{
+                    //     activity: {
+                    //         text: activity => `${activity.level} contributions on ${activity.date}`,
+                    //         placement: 'top',
+                    //         offset: 6,
+                    //         hoverRestMs: 300,
+                    //         transitionStyles: {
+                    //             duration: 100,
+                    //         },
+                    //         withArrow: true,
+                    //     },
+                    // }}
                 />
             </PanelSection>
         </Panel>

@@ -1,13 +1,20 @@
-import { ChevronDown, ChevronUp, GraduationCap } from "lucide-react";
-import type { ReactNode } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { Pulse } from "@/components/Pulse.tsx";
+import { TimelineDuration } from "@/components/Timeline/TimelineDuration.tsx";
 
-export function TimelineHeader({children}: {children: ReactNode}) {
+export function TimelineHeader({title, meta, logo, from, to}: {title: string, meta: string, logo?: string, from: string, to: string}) {
     return (
-        <div className="flex gap-4 items-center">
-            <span className="flex size-6 items-center justify-center bg-muted text-muted-foreground ring-1 ring-border ring-offset-2 ring-offset-background border border-muted-foreground/30 rounded-sm">
-                <GraduationCap className="size-4 text-muted-foreground" />
+        <div className="flex gap-4 items-start">
+            <span className="flex size-12 items-center justify-center bg-muted text-muted-foreground ring-1 ring-border ring-offset-2 ring-offset-background border border-muted-foreground/30 rounded-sm overflow-hidden">
+                <img src={logo} alt={logo} className="w-full h-full object-contain rounded-sm" />
             </span>
-            <h3 className="text-primary text-base text-left flex-1">{children}</h3>
+            <div className="flex flex-col flex-1 text-left">
+                <h3 className="text-primary text-base">{title} {to === "present" && <Pulse />}</h3>
+                <span>{meta}</span>
+            </div>
+            <div>
+                <TimelineDuration from={from} to={to} />
+            </div>
             <span className="group-data-[state=open]:hidden">
                 <ChevronDown size={16} />
             </span>

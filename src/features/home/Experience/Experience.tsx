@@ -13,6 +13,7 @@ export function Experience() {
                             <TimelineItemCollapsible
                                 key={experience.name}
                                 title={experience.name}
+                                logo={experience.logo}
                                 meta={`${experience.status} | ${experience.role}`}
                                 from={experience.from}
                                 to={experience.to}

@@ -1,5 +1,6 @@
 interface BaseData {
     name: string,
+    logo: string,
     from: string,
     to: string | "present",
     description?: string,
