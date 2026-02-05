@@ -1,6 +1,6 @@
 import img from "./cover.jpeg";
 import { Panel, PanelSection } from "@/components/Panel";
-import { MapPin } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { CurrentTime } from "@/components/CurrentTime.tsx";
 
 export function Profile() {
@@ -17,10 +17,7 @@ export function Profile() {
                         <h1 className="font-bold text-3xl tracking-tight text-primary">
                             Low Kang Xuan
                         </h1>
-                        <div>
-                            @k4nggg
-                        </div>
-                        <span className="flex gap-3">
+                        <span className="flex gap-2">
                             <span className="flex items-center gap-1.5">
                                 <MapPin className="inline" size="18" />{" "}
                                 Singapore
@@ -30,6 +27,17 @@ export function Profile() {
                                 <CurrentTime />
                             </span>
                         </span>
+                        <div className="flex gap-2">
+                            <span className="flex">
+                                <Github size={20} />
+                            </span>
+                            <span className="flex">
+                                <Linkedin size={20} />
+                            </span>
+                            <span className="flex">
+                                <Mail size={20} />
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className="text-sm">

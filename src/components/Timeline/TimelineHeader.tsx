@@ -4,13 +4,13 @@ import { TimelineDuration } from "@/components/Timeline/TimelineDuration.tsx";
 
 export function TimelineHeader({title, meta, logo, from, to}: {title: string, meta: string, logo?: string, from: string, to: string}) {
     return (
-        <div className="flex gap-4 items-start">
+        <div className="flex gap-4">
             <span className="flex size-12 items-center justify-center bg-muted text-muted-foreground ring-1 ring-border ring-offset-2 ring-offset-background border border-muted-foreground/30 rounded-sm overflow-hidden">
                 <img src={logo} alt={logo} className="w-full h-full object-contain rounded-sm" />
             </span>
-            <div className="flex flex-col flex-1 text-left">
+            <div className="flex flex-col justify-evenly flex-1 text-left">
                 <h3 className="text-primary text-base">{title} {to === "present" && <Pulse />}</h3>
-                <span>{meta}</span>
+                <div>{meta}</div>
             </div>
             <div>
                 <TimelineDuration from={from} to={to} />

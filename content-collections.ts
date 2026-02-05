@@ -2,6 +2,7 @@ import { remarkPlugins } from '@prose-ui/core'
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
 import { z } from "zod";
+import rehypePrettyCode from "rehype-pretty-code";
 
 const posts = defineCollection({
     name: "posts",
@@ -18,7 +19,15 @@ const posts = defineCollection({
     }),
     transform: async (document, context) => {
         const mdx = await compileMDX(context, document, {
-            remarkPlugins: remarkPlugins(),
+            remarkPlugins: [],
+            rehypePlugins: [[rehypePrettyCode, {
+                theme: {
+                    light: "github-light",
+                    dark: "github-dark",
+                },
+                // optional, but often helps avoid “double backgrounds” with prose styles
+                keepBackground: false,
+            }]]
         })
         return {
             ...document,

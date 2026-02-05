@@ -1,6 +1,6 @@
 import { MoreHorizontalIcon, X } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button.tsx"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -8,9 +8,11 @@ import {
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu.tsx"
+import { navLinks } from "@/data/nav-links.ts";
+import { Link } from "@tanstack/react-router";
 
-export function MobileNav({className}: {className: string}) {
+export function MobileHeader({className}: {className: string}) {
     return (
         <>
             <DropdownMenu modal={false}>
@@ -26,15 +28,21 @@ export function MobileNav({className}: {className: string}) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-40" align="end">
-                    <DropdownMenuLabel>File Actions</DropdownMenuLabel>
                     <DropdownMenuGroup>
-                        <DropdownMenuItem>
-                            New File...
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            Share...
-                        </DropdownMenuItem>
-                        <DropdownMenuItem disabled>Download</DropdownMenuItem>
+                        {navLinks.map((nav) => {
+                            return (
+                                <DropdownMenuItem asChild>
+                                    <Link
+                                        {...nav}
+                                        key={nav.to}
+                                        to={nav.to}
+                                        activeProps={{ className: "font-bold" }}
+                                    >
+                                        {nav.label}
+                                    </Link>
+                                </DropdownMenuItem>
+                            );
+                        })}
                     </DropdownMenuGroup>
                 </DropdownMenuContent>
             </DropdownMenu>

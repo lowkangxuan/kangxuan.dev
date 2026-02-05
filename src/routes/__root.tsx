@@ -4,7 +4,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import * as React from "react";
 import appCss from "@/styles.css?url";
-import { SiteHeader } from "@/components/SiteHeader.tsx";
+import { SiteHeader } from "@/components/header/site-header.tsx";
 import { ThemeProvider } from "@/components/theme-provider.tsx";
 import { themeScript } from "@/integrations/theme/scripts";
 import { THEME_COOKIE_NAME } from "@/integrations/theme/constants";

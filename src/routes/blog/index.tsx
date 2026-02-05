@@ -1,6 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { sortedPosts } from "@/data/sorted-posts.ts";
-import { Panel, PanelHeader } from "@/components/Panel";
+import { createFileRoute } from "@tanstack/react-router";
+import { allPosts } from "content-collections";
+import { Panel, PanelHeader, PanelSection } from "@/components/Panel";
 import { DitheredBackground } from "@/components/dithered-background.tsx";
 import { BlogList } from "@/components/blog-list.tsx";
 
@@ -13,9 +13,13 @@ function BlogIndex() {
         <>
             <DitheredBackground />
             <Panel>
-                <PanelHeader>
-                    Blog
-                </PanelHeader>
+                <PanelHeader>Blog</PanelHeader>
+                <PanelSection>
+                    <span className="text-sm text-muted-foreground">
+                        The following list comprises the {allPosts.length} blogs
+                        I have written.
+                    </span>
+                </PanelSection>
             </Panel>
             <BlogList />
         </>

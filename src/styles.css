@@ -125,11 +125,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 @layer base {
     * {
         @apply border-border outline-ring/50;
@@ -139,6 +134,56 @@ code {
         @apply bg-background text-foreground;
     }
 }
+
+@layer components {
+    [data-rehype-pretty-code-figure] {
+        @apply relative my-4;
+    }
+
+    pre.shiki,
+    pre.shiki span {
+        /*background-color: var(--shiki-light-bg);*/
+        color: var(--shiki-light);
+    }
+
+    .dark pre.shiki,
+    .dark pre.shiki span {
+        /*background-color: var(--shiki-dark-bg);*/
+        color: var(--shiki-dark);
+    }
+
+    /* Enable line numbers */
+    pre.shiki {
+        counter-reset: line;
+        @apply bg-muted/40;
+    }
+
+    .dark pre.shiki {
+        @apply bg-muted/40;
+    }
+
+    /* Hide line numbers for single-line code blocks */
+    pre.shiki:not(:has([data-line]:nth-child(2))) [data-line] {
+        padding-left: 0;
+    }
+
+    pre.shiki:not(:has([data-line]:nth-child(2))) [data-line]::before {
+        display: none;
+    }
+
+    /* Each line */
+    pre.shiki [data-line] {
+        @apply relative block pl-0 py-0.5;
+    }
+
+    /* The actual number */
+    pre.shiki [data-line]::before {
+        counter-increment: line;
+        content: counter(line);
+        @apply sticky inline-block left-0 w-16 text-right pr-8 text-muted-foreground;
+    }
+}
+
 
 @utility line-before {
     @apply relative before:absolute before:bg-border before:h-px before:w-[200dvw] before:-left-[100dvw] before:top-0;
@@ -150,5 +195,9 @@ code {
 
 .react-activity-calendar__calendar rect {
     @apply !stroke-primary/10;
+}
+
+.react-activity-calendar__scroll-container {
+    direction: rtl;
 }
 
