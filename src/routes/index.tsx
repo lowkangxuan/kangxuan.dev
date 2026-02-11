@@ -21,8 +21,8 @@ function App() {
             <GithubActivity />
             <Separator />
 
-            <Stack />
-            <Separator />
+            {/*<Stack />*/}
+            {/*<Separator />*/}
 
             <Experience />
             <Separator />
