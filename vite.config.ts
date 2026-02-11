@@ -8,6 +8,7 @@ import viteTsConfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
 import netlify from "@netlify/vite-plugin-tanstack-start";
 import contentCollections from "@content-collections/vite";
+import { nitro } from "nitro/vite";
 
 const BLOG_ASSET_EXT_RE = /\.(png|jpe?g|gif|webp|svg|avif|bmp|tiff?)$/i;
 
@@ -110,7 +111,8 @@ const config = defineConfig({
     },
     plugins: [
         devtools(),
-        netlify(),
+        // netlify(),
+        nitro(),
         copyBlogAssets(),
         // this is the plugin that enables path aliases
         viteTsConfigPaths({
