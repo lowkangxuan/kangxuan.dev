@@ -1,6 +1,4 @@
 import {
-    ArrowDown,
-    ArrowUp,
     ExternalLink,
     Home,
     PencilLine,
@@ -22,6 +20,7 @@ import {
 } from "@/components/ui/command.tsx";
 import {navLinks} from "@/data/nav-links.ts";
 import { sortedPosts } from "@/data/sorted-posts.ts";
+import { PROJECTS } from "@/data/projects.ts";
 
 const menuIcons = {
     "home": <Home />,
@@ -71,7 +70,16 @@ export function SearchMenu() {
                             })}
                         </CommandGroup>
                         <CommandGroup heading="Projects">
-
+                            {PROJECTS.map(project => {
+                                return (
+                                    <CommandItem asChild key={project.name}>
+                                        <Link to={project.href} target="_blank" rel="noopener noreferrer">
+                                            <ExternalLink />
+                                            {project.name}
+                                        </Link>
+                                    </CommandItem>
+                                );
+                            })}
                         </CommandGroup>
                         <CommandGroup heading="Blog">
                             {sortedPosts.map(post => {

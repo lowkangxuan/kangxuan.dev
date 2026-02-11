@@ -1,6 +1,6 @@
 import { data } from "./data.ts";
 import { Panel, PanelHeader, PanelSection } from "@/components/main-panel";
-import { Timeline, TimelineItemCollapsible } from "@/components/Timeline";
+import { Timeline, TimelineItemCollapsible } from "@/components/timeline";
 
 export function Experience() {
     return (

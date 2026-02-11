@@ -1,14 +1,14 @@
 import path from "node:path";
 import fs from "node:fs/promises";
-import { defineConfig, type Plugin } from "vite";
+import { defineConfig  } from "vite";
 import { devtools } from "@tanstack/devtools-vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import viteTsConfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
-// import netlify from "@netlify/vite-plugin-tanstack-start";
 import contentCollections from "@content-collections/vite";
 import { nitro } from "nitro/vite";
+import type {Plugin} from "vite";
 
 const BLOG_ASSET_EXT_RE = /\.(png|jpe?g|gif|webp|svg|avif|bmp|tiff?)$/i;
 
@@ -111,7 +111,6 @@ const config = defineConfig({
     },
     plugins: [
         devtools(),
-        // netlify(),
         nitro(),
         copyBlogAssets(),
         // this is the plugin that enables path aliases

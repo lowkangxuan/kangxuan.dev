@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Pulse } from "@/components/Pulse.tsx";
-import { TimelineDuration } from "@/components/Timeline/TimelineDuration.tsx";
+import { TimelineDuration } from "@/components/timeline/TimelineDuration.tsx";
 
 export function TimelineHeader({title, meta, logo, from, to}: {title: string, meta: string, logo?: string, from: string, to: string}) {
     return (

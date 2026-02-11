@@ -3,7 +3,7 @@ import { Panel, PanelHeader, PanelSection } from "@/components/main-panel";
 import {
     Timeline,
     TimelineItemCollapsible,
-} from "@/components/Timeline";
+} from "@/components/timeline";
 
 export function Education() {
     return (

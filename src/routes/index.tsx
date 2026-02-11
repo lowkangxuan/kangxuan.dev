@@ -6,6 +6,7 @@ import { GithubActivity } from "@/features/home/github-activity.tsx";
 import { DitheredBackground } from "@/components/dithered-background.tsx";
 import { BlogSection } from "@/features/home/blog-section.tsx";
 import { Stack } from "@/features/home/skills";
+import { ProjectsSection } from "@/features/home/projects-section.tsx";
 
 export const Route = createFileRoute("/")({
     component: App,
@@ -21,13 +22,16 @@ function App() {
             <GithubActivity />
             <Separator />
 
-            {/*<Stack />*/}
-            {/*<Separator />*/}
+            <Stack />
+            <Separator />
 
             <Experience />
             <Separator />
 
             <Education />
+            <Separator />
+
+            <ProjectsSection />
             <Separator />
 
             <BlogSection />

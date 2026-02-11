@@ -4,9 +4,9 @@ import {
     CollapsibleContent,
     CollapsibleTrigger,
 } from "@/components/ui/collapsible.tsx";
-import { TimelineContent } from "@/components/Timeline/TimelineContent.tsx";
-import { TimelineHeader } from "@/components/Timeline/TimelineHeader.tsx";
-import { TimelineSkillset } from "@/components/Timeline/TimelineSkillset.tsx";
+import { TimelineContent } from "@/components/timeline/TimelineContent.tsx";
+import { TimelineHeader } from "@/components/timeline/TimelineHeader.tsx";
+import { TimelineSkillset } from "@/components/timeline/TimelineSkillset.tsx";
 
 interface TimelineItemCollapsibleProps {
     title: string;

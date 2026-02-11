@@ -1,5 +1,5 @@
 import { sortedPosts } from "@/data/sorted-posts.ts";
-import { Panel, PanelHeader, PanelSection } from "@/components/main-panel";
+import { Panel, PanelHeader } from "@/components/main-panel";
 import { BlogList } from "@/components/blog-list.tsx";
 
 export function BlogSection() {
