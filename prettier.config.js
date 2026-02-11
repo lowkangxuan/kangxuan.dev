@@ -1,6 +1,6 @@
 //  @ts-check
 
-/** @type {import('prettier').Config} */
+/** @types {import('prettier').Config} */
 const config = {
     semi: true,
     singleQuote: false,

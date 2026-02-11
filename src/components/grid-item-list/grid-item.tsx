@@ -31,7 +31,7 @@ export function GridItem({ title, description, thumbnailUrl, date, link }: GridI
             >
                 <div className="flex-1 rounded-lg overflow-hidden">
                     {thumbnailUrl ? (
-                        <img src={thumbnailUrl} alt="" className="rounded-lg border" />
+                        <img src={thumbnailUrl} alt="" className="rounded-lg border" loading="lazy" />
                     ) : (
                         <div className="bg-muted h-full"></div>
                     )}

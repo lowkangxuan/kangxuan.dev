@@ -1,4 +1,4 @@
-import type { ExperienceData } from "@/type/GenericTypes";
+import type { ExperienceData } from "@/types/GenericTypes";
 
 export const data: Array<ExperienceData> = [
     {

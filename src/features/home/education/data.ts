@@ -1,4 +1,4 @@
-import type { EducationData } from "@/type/GenericTypes.ts";
+import type { EducationData } from "@/types/GenericTypes.ts";
 
 export const EDUCATION_DATA: Array<EducationData> = [
     {
