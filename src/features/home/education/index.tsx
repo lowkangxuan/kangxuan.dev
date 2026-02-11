@@ -1,5 +1,5 @@
-import { data } from "./data.ts";
-import { Panel, PanelHeader, PanelSection } from "@/components/Panel";
+import { EDUCATION_DATA } from "./data.ts";
+import { Panel, PanelHeader, PanelSection } from "@/components/main-panel";
 import {
     Timeline,
     TimelineItemCollapsible,
@@ -11,7 +11,7 @@ export function Education() {
             <PanelHeader>Education</PanelHeader>
             <PanelSection>
                 <Timeline>
-                    {data.map((education) => {
+                    {EDUCATION_DATA.map((education) => {
                         return (
                             <TimelineItemCollapsible
                                 key={education.name}

@@ -201,3 +201,11 @@ body {
     direction: rtl;
 }
 
+/*[data-slot="command"] {*/
+/*    @apply bg-transparent outline-none pl-0 pl-0;*/
+/*}*/
+
+/*[data-slot="command-input-wrapper"] {*/
+/*    @apply bg-popover border overflow-hidden;*/
+/*}*/
+

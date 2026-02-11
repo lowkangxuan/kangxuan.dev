@@ -1,5 +1,5 @@
 import { data } from "./data.ts";
-import { Panel, PanelHeader, PanelSection } from "@/components/Panel";
+import { Panel, PanelHeader, PanelSection } from "@/components/main-panel";
 import { Timeline, TimelineItemCollapsible } from "@/components/Timeline";
 
 export function Experience() {

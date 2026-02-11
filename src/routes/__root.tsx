@@ -9,7 +9,8 @@ import { ThemeProvider } from "@/components/theme-provider.tsx";
 import { themeScript } from "@/integrations/theme/scripts";
 import { THEME_COOKIE_NAME } from "@/integrations/theme/constants";
 import { getThemeFromCookie } from "@/integrations/theme/utils";
-import { SiteFooter } from "@/components/SiteFooter.tsx";
+import { SiteFooter } from "@/components/site-footer.tsx";
+import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 
 export const Route = createRootRoute({
     loader: async () => {
@@ -26,7 +27,7 @@ export const Route = createRootRoute({
                 content: "width=device-width, initial-scale=1",
             },
             {
-                title: "TanStack Start Starter",
+                title: "Kang Xuan - Computer Science Undergraduate",
             },
         ],
         links: [
@@ -64,11 +65,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                     defaultTheme="system"
                     storageKey={THEME_COOKIE_NAME}
                 >
-                    <SiteHeader />
-                    <main className="max-w-dvw px-2 overflow-hidden">
-                        <div className="md:max-w-3xl mx-auto">{children}</div>
-                    </main>
-                    <SiteFooter />
+                    <TooltipProvider>
+                        <SiteHeader />
+                        <main className="max-w-dvw px-2 overflow-hidden">
+                            <div className="md:max-w-3xl mx-auto">{children}</div>
+                        </main>
+                        <SiteFooter />
+                    </TooltipProvider>
                 </ThemeProvider>
                 <TanStackDevtools
                     config={{

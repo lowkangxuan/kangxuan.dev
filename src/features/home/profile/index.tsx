@@ -1,7 +1,9 @@
-import img from "./cover.jpeg";
-import { Panel, PanelSection } from "@/components/Panel";
 import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import img from "./cover.jpeg";
+import { Panel, PanelSection } from "@/components/main-panel";
 import { CurrentTime } from "@/components/CurrentTime.tsx";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip.tsx";
+import { SOCIAL_LINKS } from "@/data/social-links.tsx";
 
 export function Profile() {
     return (
@@ -28,15 +30,18 @@ export function Profile() {
                             </span>
                         </span>
                         <div className="flex gap-2">
-                            <span className="flex">
-                                <Github size={20} />
-                            </span>
-                            <span className="flex">
-                                <Linkedin size={20} />
-                            </span>
-                            <span className="flex">
-                                <Mail size={20} />
-                            </span>
+                            {SOCIAL_LINKS.map((link) => {
+                                return (
+                                    <Tooltip key={link.name}>
+                                        <TooltipTrigger asChild>
+                                            <a href={link.href} target="_blank" rel="noopener noreferrer" className="">{link.icon}</a>
+                                        </TooltipTrigger>
+                                        <TooltipContent side="top">
+                                            {link.name}
+                                        </TooltipContent>
+                                    </Tooltip>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>

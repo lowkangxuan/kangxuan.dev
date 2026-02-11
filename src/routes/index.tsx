@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Experience } from "@/features/home/Experience/Experience.tsx";
-import { Education } from "@/features/home/Education/Education.tsx";
-import { Profile } from "@/features/home/Profile/Profile.tsx";
-import { GithubInfo } from "@/features/home/GithubInfo.tsx";
+import { Experience } from "@/features/home/experience";
+import { Education } from "@/features/home/education";
+import { Profile } from "@/features/home/profile";
+import { GithubActivity } from "@/features/home/github-activity.tsx";
 import { DitheredBackground } from "@/components/dithered-background.tsx";
-import { BlogSection } from "@/features/home/BlogSection.tsx";
+import { BlogSection } from "@/features/home/blog-section.tsx";
+import { Stack } from "@/features/home/skills";
 
 export const Route = createFileRoute("/")({
     component: App,
@@ -17,7 +18,10 @@ function App() {
             <Profile />
             <Separator />
 
-            <GithubInfo />
+            <GithubActivity />
+            <Separator />
+
+            <Stack />
             <Separator />
 
             <Experience />

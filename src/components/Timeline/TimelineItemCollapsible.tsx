@@ -28,7 +28,7 @@ export function TimelineItemCollapsible({title, logo, meta, from, to, descriptio
             </CollapsibleTrigger>
             <CollapsibleContent className="flex flex-col pl-16 gap-0 overflow-hidden duration-300 data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
                     {description && (
-                    <div className="text-primary prose-ul:pl-6 prose-li:list-disc prose-li:my-2 marker:text-muted-foreground marker:text-xs">
+                    <div className="text-primary prose-ul:pl-6 prose-li:list-disc prose-li:my-2 marker:text-muted-foreground marker:text-xs pt-1">
                         <Markdown>{description}</Markdown>
                     </div>
                 )}

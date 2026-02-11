@@ -1,7 +1,7 @@
 import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { sortedPosts } from "@/data/sorted-posts.ts";
-import { Panel, PanelHeader, PanelSection } from "@/components/Panel";
+import { Panel, PanelHeader, PanelSection } from "@/components/main-panel";
 import { DitheredBackground } from "@/components/dithered-background.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { MDX } from "@/components/mdx.tsx";
@@ -48,13 +48,18 @@ function PostPage() {
         <>
             <DitheredBackground>
                 {page.thumbnail && (
-                    <div className="relative flex justify-center p-4 min-w-0">
-
-                        <img
-                            src={page.thumbnailUrl}
-                            alt={page.title}
-                            className="w-3/4 rounded-md object-cover ring ring-offset-4 ring-offset-background ring-muted-foreground/30"
-                        />
+                    <div className="flex justify-center p-4 min-w-0">
+                        <div className="relative w-3/4 p-2 bg-background border border-primary/30">
+                            <div className="absolute -left-0.5  -top-0.5    size-4 border-t-[3px] border-l-[3px] border-primary/30"></div>
+                            <div className="absolute -right-0.5 -top-0.5    size-4 border-t-[3px] border-r-[3px] border-primary/30"></div>
+                            <div className="absolute -right-0.5 -bottom-0.5 size-4 border-b-[3px] border-r-[3px] border-primary/30"></div>
+                            <div className="absolute -left-0.5  -bottom-0.5 size-4 border-b-[3px] border-l-[3px] border-primary/30"></div>
+                            <img
+                                src={page.thumbnailUrl}
+                                alt={page.title}
+                                className="object-cover"
+                            />
+                        </div>
                     </div>
                 )}
             </DitheredBackground>

@@ -1,8 +1,8 @@
 import { GitHubCalendar } from "react-github-calendar";
 import 'react-activity-calendar/tooltips.css';
-import { Panel, PanelSection } from "@/components/Panel";
+import { Panel, PanelSection } from "@/components/main-panel";
 
-export function GithubInfo() {
+export function GithubActivity() {
     return (
         <Panel>
             <PanelSection className="text-muted-foreground">

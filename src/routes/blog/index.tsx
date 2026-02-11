@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { allPosts } from "content-collections";
-import { Panel, PanelHeader, PanelSection } from "@/components/Panel";
+import { Panel, PanelHeader, PanelSection } from "@/components/main-panel";
 import { DitheredBackground } from "@/components/dithered-background.tsx";
 import { BlogList } from "@/components/blog-list.tsx";
 

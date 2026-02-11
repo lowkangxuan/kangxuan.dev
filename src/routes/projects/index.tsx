@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { DitheredBackground } from "@/components/dithered-background.tsx";
-import { Panel, PanelHeader, PanelSection } from "@/components/Panel";
+import { Panel, PanelHeader, PanelSection } from "@/components/main-panel";
 
-export const Route = createFileRoute("/showcase/")({
+export const Route = createFileRoute("/projects/")({
     component: RouteComponent,
 });
 
@@ -11,7 +11,7 @@ function RouteComponent() {
         <div>
             <DitheredBackground />
             <Panel>
-                <PanelHeader>Showcase</PanelHeader>
+                <PanelHeader>Projects</PanelHeader>
                 <PanelSection>
                     <span className="text-sm text-muted-foreground">
                         Proudly completed projects over the year.
