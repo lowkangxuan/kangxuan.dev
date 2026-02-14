@@ -27,13 +27,18 @@ export function GridItem({ title, description, thumbnailUrl, date, link }: GridI
                 to={link.to}
                 {...("params" in link ? { params: link.params } : {})}
                 {...(link.newTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="flex flex-col gap-1 h-full p-2 bg-background dark:bg-background/65 rounded-xl border border-muted-foreground/30"
+                className="flex flex-col h-full gap-1 p-2 bg-background dark:bg-background/65 rounded-xl border border-muted-foreground/30"
             >
-                <div className="flex-1 rounded-lg overflow-hidden">
+                <div className="rounded-lg overflow-hidden border bg-muted aspect-video">
                     {thumbnailUrl ? (
-                        <img src={thumbnailUrl} alt="" className="rounded-lg border" loading="lazy" />
+                        <img
+                            src={thumbnailUrl}
+                            alt=""
+                            loading="lazy"
+                            className="h-full w-full object-cover"
+                        />
                     ) : (
-                        <div className="bg-muted h-full"></div>
+                        <div className="bg-muted h-full w-full" />
                     )}
                 </div>
                 <div className="flex flex-col gap-2 px-2 text-xs text-muted-foreground">

@@ -74,7 +74,7 @@ export function ThemeProvider({
         if (!mounted) return;
 
         const root = window.document.documentElement;
-        root.classList.remove(THEME_CLASSES.LIGHT, THEME_CLASSES.DARK);
+        root.classList.remove(THEME_CLASSES.LIGHT, THEME_CLASSES.DARK, "system");
 
         if (theme === "system") {
             const systemTheme = window.matchMedia(DARK_MODE_MEDIA_QUERY).matches
@@ -118,9 +118,9 @@ export function ThemeProvider({
     };
 
     return (
-        <ThemeProviderContext.Provider {...props} value={value}>
+        <ThemeProviderContext {...props} value={value}>
             {children}
-        </ThemeProviderContext.Provider>
+        </ThemeProviderContext>
     );
 }
 

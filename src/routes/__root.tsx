@@ -11,10 +11,11 @@ import { THEME_COOKIE_NAME } from "@/integrations/theme/constants";
 import { getThemeFromCookie } from "@/integrations/theme/utils";
 import { SiteFooter } from "@/components/site-footer.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
+import { DitheredBackground } from "@/components/dithered-background.tsx";
 
 export const Route = createRootRoute({
     loader: async () => {
-        const theme = (await getThemeFromCookie()) ?? "light";
+        const theme = await getThemeFromCookie();
         return { theme };
     },
     head: () => ({
@@ -45,7 +46,7 @@ export const Route = createRootRoute({
 function RootDocument({ children }: { children: React.ReactNode }) {
     const { theme } = Route.useLoaderData();
     return (
-        <html className={`antialiased ${theme ?? ""}`} lang="en">
+        <html className={`antialiased ${theme}`} lang="en">
             <head>
                 <HeadContent />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -68,7 +69,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                     <TooltipProvider>
                         <SiteHeader />
                         <main className="max-w-dvw px-2 overflow-hidden">
-                            <div className="md:max-w-3xl mx-auto">{children}</div>
+                            <div className="md:max-w-3xl mx-auto">
+                                {children}
+                                <DitheredBackground />
+                            </div>
                         </main>
                         <SiteFooter />
                     </TooltipProvider>

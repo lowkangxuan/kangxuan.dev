@@ -5,7 +5,7 @@ type Theme = "dark" | "light" | "system";
 
 function ToggleButton({theme, currentTheme, children, onClick}) {
     return (
-        <button data-selected={theme === currentTheme ? "true" : undefined} onClick={onClick} className="rounded-full p-1.5 dark:data-selected:bg-muted-foreground/15 dark:data-selected:border-muted-foreground/30 data-selected:bg-background data-selected:border">
+        <button data-selected={theme === currentTheme ? "true" : undefined} onClick={onClick} className="rounded-full border border-transparent p-1.5 dark:data-selected:bg-muted-foreground/15 dark:data-selected:border-muted-foreground/30 data-selected:bg-background data-selected:border-border">
             {children}
         </button>
     )

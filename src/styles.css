@@ -180,8 +180,12 @@ body {
     pre.shiki [data-line]::before {
         counter-increment: line;
         content: counter(line);
-        @apply sticky inline-block left-0 w-16 text-right pr-8 text-muted-foreground;
+        @apply sticky inline-block left-0 w-10 text-right pr-8 text-muted-foreground;
     }
+}
+
+@utility font-inter {
+    font-family: "Inter", sans-serif;
 }
 
 

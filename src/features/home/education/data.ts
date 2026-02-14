@@ -8,7 +8,8 @@ export const EDUCATION_DATA: Array<EducationData> = [
         from: "08.2025",
         to: "present",
         description: `
-- Test
+- Learnt the basics of Computer Architecture.
+- Exposed to Data Structures & Algorithms.
 `,
         skills: ["Python", "Java", "C/C++", "Data Structures", "Algorithms"],
     },
@@ -19,7 +20,7 @@ export const EDUCATION_DATA: Array<EducationData> = [
         from: "04.2020",
         to: "04.2023",
         description: `
-- Director's List for Excellent Academic Performance 2020
+- Director's List for Excellent Academic Performance 2020.
 - Developed skills for fullstack development.
 - Worked on multiple fullstack web applications as part of school assignments.
 - Learnt Game Development with Unity and 3D modeling with Maya.
