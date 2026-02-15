@@ -12,4 +12,10 @@ export const PROJECTS: Array<project_data> = [
         thumbnail: "projects/todo-list-cover.png",
         href: "https://lowkangxuan.github.io/todo-list/"
     },
+    {
+        name: "kangxuan.dev",
+        description: "Portfolio Site",
+        thumbnail: "projects/kangxuan-dev-cover.png",
+        href: "https://kangxuan.dev"
+    },
 ]

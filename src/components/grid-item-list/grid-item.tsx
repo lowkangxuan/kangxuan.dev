@@ -27,7 +27,7 @@ export function GridItem({ title, description, thumbnailUrl, date, link }: GridI
                 to={link.to}
                 {...("params" in link ? { params: link.params } : {})}
                 {...(link.newTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="flex flex-col h-full gap-1 p-2 bg-background dark:bg-background/65 rounded-xl border border-muted-foreground/30"
+                className="flex flex-col h-full gap-2 p-2 bg-background dark:bg-background/65 rounded-xl border border-muted-foreground/30"
             >
                 <div className="rounded-lg overflow-hidden border bg-muted aspect-video">
                     {thumbnailUrl ? (
@@ -43,7 +43,7 @@ export function GridItem({ title, description, thumbnailUrl, date, link }: GridI
                 </div>
                 <div className="flex flex-col gap-2 px-2 text-xs text-muted-foreground">
                     <div className="flex justify-between items-center">
-                        <h2 className="font-bold text-base text-primary">
+                        <h2 className="font-bold text-base text-primary max-w-52">
                             {title}
                         </h2>
                         {date && <span>{date}</span>}

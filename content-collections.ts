@@ -33,9 +33,7 @@ const posts = defineCollection({
             slug: document._meta.path.split('/').pop()!,
             fullPath: document._meta.path,
             mdx,
-            thumbnailUrl: document.thumbnail
-                ? `/blog/${document._meta.directory}/${document.thumbnail.replace('./', '')}`
-                : undefined,
+            thumbnailUrl: document.thumbnail ?? undefined,
         };
     },
 });
