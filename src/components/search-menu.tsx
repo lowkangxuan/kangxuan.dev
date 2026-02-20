@@ -53,7 +53,7 @@ export function SearchMenu() {
                 </div>
             </Button>
             <CommandDialog open={open} onOpenChange={setOpen}>
-                <Command className="min-h-[22rem]">
+                <Command className="min-h-[26rem] gap-4">
                     <CommandInput placeholder="Type a command or search..." />
                     <CommandList>
                         <CommandEmpty>No results found.</CommandEmpty>
@@ -95,9 +95,6 @@ export function SearchMenu() {
                         </CommandGroup>
                     </CommandList>
                 </Command>
-                <div className="border-t">
-                    test
-                </div>
             </CommandDialog>
         </>
 

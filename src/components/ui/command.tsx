@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { Command as CommandPrimitive } from "cmdk"
-import { SearchIcon } from "lucide-react"
+import { ArrowDown, ArrowUp, SearchIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils"
 import {
@@ -12,6 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Kbd, KbdGroup } from "@/components/ui/kbd.tsx";
 
 function Command({
   className,
@@ -21,7 +22,7 @@ function Command({
     <CommandPrimitive
       data-slot="command"
       className={cn(
-        "bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md",
+        "bg-transparent text-popover-foreground flex h-full w-full flex-col rounded-md",
         className
       )}
       {...props}
@@ -49,7 +50,7 @@ function CommandDialog({
               <DialogDescription>{description}</DialogDescription>
           </DialogHeader>
           <DialogContent
-              className={cn("overflow-hidden p-0", className)}
+              className={cn("p-0", className)}
               showCloseButton={showCloseButton}
           >
               <Command className="[&_[cmdk-group-heading]]:text-muted-foreground **:data-[slot=command-input-wrapper]:h-12
@@ -63,7 +64,8 @@ function CommandDialog({
               [&_[cmdk-item]]:px-2
               [&_[cmdk-item]]:py-2
               [&_[cmdk-item]_svg]:h-5
-              [&_[cmdk-item]_svg]:w-5">
+              [&_[cmdk-item]_svg]:w-5
+              ">
                   {children}
               </Command>
           </DialogContent>
@@ -76,19 +78,35 @@ function CommandInput({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
-    <div
-      data-slot="command-input-wrapper"
-      className="flex h-9 items-center gap-2 border-b px-3"
-    >
-      <SearchIcon className="size-4 shrink-0 opacity-50" />
-      <CommandPrimitive.Input
-        data-slot="command-input"
-        className={cn(
-          "placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
-          className
-        )}
-        {...props}
-      />
+    <div className="flex flex-col rounded-xl border overflow-hidden shadow-md">
+        <div
+            data-slot="command-input-wrapper"
+            className="bg-popover flex h-9 items-center gap-2 border-b px-3"
+        >
+            <SearchIcon className="size-4 shrink-0 opacity-50" />
+            <CommandPrimitive.Input
+                data-slot="command-input"
+                className={cn(
+                    "placeholder:text-muted-foreground flex h-10 w-full bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
+                    className
+                )}
+                {...props}
+            />
+        </div>
+        <div className="flex justify-end gap-2 bg-muted px-3 py-2 text-sm text-muted-foreground font-semibold">
+            <div className="flex items-center gap-1">
+                Navigate
+                <KbdGroup>
+                    <Kbd className="bg-background p-0.5 rounded-sm border"><ArrowUp size={14}/></Kbd>
+                    <Kbd className="bg-background p-0.5 rounded-sm border"><ArrowDown size={14}/></Kbd>
+                </KbdGroup>
+            </div>
+            <div className="w-px bg-border"></div>
+            <div className="flex items-center gap-1">
+                Close
+                <Kbd className="bg-background p-0.5 rounded-sm border">Esc</Kbd>
+            </div>
+        </div>
     </div>
   )
 }
@@ -101,7 +119,7 @@ function CommandList({
     <CommandPrimitive.List
       data-slot="command-list"
       className={cn(
-        "max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto",
+        "bg-popover border rounded-xl shadow-md overscroll-none max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto",
         className
       )}
       {...props}
