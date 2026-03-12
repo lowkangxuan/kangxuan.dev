@@ -5,7 +5,7 @@ import { Profile } from "@/features/home/profile";
 import { GithubActivity } from "@/features/home/github-activity.tsx";
 import { DitheredBackground } from "@/components/dithered-background.tsx";
 import { BlogSection } from "@/features/home/blog-section.tsx";
-import { Stack } from "@/features/home/skills";
+import { Skills } from "@/features/home/skills";
 import { ProjectsSection } from "@/features/home/projects-section.tsx";
 
 export const Route = createFileRoute("/")({
@@ -22,7 +22,7 @@ function App() {
             <GithubActivity />
             <Separator />
 
-            <Stack />
+            <Skills />
             <Separator />
 
             <Experience />

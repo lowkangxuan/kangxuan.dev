@@ -7,7 +7,7 @@ import {
     MILLISECONDS_PER_DAY,
     THEME_CLASSES,
     THEME_COOKIE_NAME,
-} from "../integrations/theme/constants";
+} from "../integrations/theme/constants.tsx";
 
 type Theme = "dark" | "light" | "system";
 
@@ -19,6 +19,7 @@ type ThemeProviderProps = {
 
 type ThemeProviderState = {
     theme: Theme;
+    normalizedTheme: Theme;
     setTheme: (theme: Theme) => void;
 };
 
@@ -53,6 +54,7 @@ export function ThemeProvider({
                                   ...props
                               }: ThemeProviderProps) {
     const [theme, setTheme] = useState<Theme>(defaultTheme);
+    const [normalizedTheme, setNormalizedTheme] = useState<Theme>(defaultTheme); // To get light/dark based on system
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -61,6 +63,7 @@ export function ThemeProvider({
 
         if (savedTheme) {
             setTheme(savedTheme);
+            if (savedTheme != "system") setNormalizedTheme(savedTheme);
         } else {
             // First visit - set to system theme so it can respond to OS changes
             setTheme("system");
@@ -81,6 +84,7 @@ export function ThemeProvider({
                 ? THEME_CLASSES.DARK
                 : THEME_CLASSES.LIGHT;
 
+            setNormalizedTheme(systemTheme);
             root.classList.add(systemTheme);
             return;
         }
@@ -101,6 +105,8 @@ export function ThemeProvider({
             const systemTheme = mediaQuery.matches
                 ? THEME_CLASSES.DARK
                 : THEME_CLASSES.LIGHT;
+
+            setNormalizedTheme(systemTheme);
             root.classList.add(systemTheme);
         };
 
@@ -111,6 +117,7 @@ export function ThemeProvider({
 
     const value = {
         theme,
+        normalizedTheme,
         setTheme: (newTheme: Theme) => {
             setCookie(THEME_COOKIE_NAME, newTheme);
             setTheme(newTheme);

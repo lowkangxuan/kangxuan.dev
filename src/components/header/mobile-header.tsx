@@ -6,11 +6,11 @@ import {
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu.tsx"
 import { navLinks } from "@/data/nav-links.ts";
 import { Link } from "@tanstack/react-router";
+import { cn } from "@/lib/utils.ts";
 
 export function MobileHeader({className}: {className: string}) {
     return (
@@ -18,7 +18,7 @@ export function MobileHeader({className}: {className: string}) {
             <DropdownMenu modal={false}>
                 <DropdownMenuTrigger asChild>
                     <Button
-                        className={`${className} group`}
+                        className={cn("group", className)}
                         variant="outline"
                         aria-label="Open menu"
                         size="icon-sm"

@@ -21,9 +21,8 @@ export const EDUCATION_DATA: Array<EducationData> = [
         to: "04.2023",
         description: `
 - Director's List for Excellent Academic Performance 2020.
-- Developed skills for fullstack development.
-- Worked on multiple fullstack web applications as part of school assignments.
-- Learnt Game Development with Unity and 3D modeling with Maya.
+- Best Performance in the module Interactive Development.
+- Took up the Interactive Development module and applied knowledge learnt to develop full-stack web applications.
 `,
         skills: ["HTML", "CSS", "JavaScript", "Python", "CSharp", "Unity Game Engine", "Game Design and Development", "UI/UX Design"],
     }

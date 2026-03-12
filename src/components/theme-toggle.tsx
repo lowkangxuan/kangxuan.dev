@@ -1,7 +1,5 @@
-import { Moon, Sun, LaptopMinimal } from "lucide-react";
-import { useTheme } from "@/components/theme-provider";
-
-type Theme = "dark" | "light" | "system";
+import { LaptopMinimal, Moon, Sun } from "lucide-react";
+import { useTheme } from "@/hooks/theme-provider.tsx";
 
 function ToggleButton({theme, currentTheme, children, onClick}) {
     return (
@@ -13,15 +11,12 @@ function ToggleButton({theme, currentTheme, children, onClick}) {
 
 export function ModeToggle() {
     const { theme, setTheme } = useTheme();
-    function toggleTheme(nextTheme: Theme) {
-        setTheme(nextTheme);
-    }
 
     return (
         <div className="flex rounded-full bg-secondary p-0.5">
-            <ToggleButton theme="system"  currentTheme={theme} onClick={() => toggleTheme("system")}><LaptopMinimal size={14} /></ToggleButton>
-            <ToggleButton theme="light"   currentTheme={theme} onClick={() => toggleTheme("light")}><Sun            size={14} /></ToggleButton>
-            <ToggleButton theme="dark"    currentTheme={theme} onClick={() => toggleTheme("dark")}><Moon            size={14} /></ToggleButton>
+            <ToggleButton theme="system"  currentTheme={theme} onClick={() => setTheme("system")}><LaptopMinimal size={14} /></ToggleButton>
+            <ToggleButton theme="light"   currentTheme={theme} onClick={() => setTheme("light") }><Sun           size={14} /></ToggleButton>
+            <ToggleButton theme="dark"    currentTheme={theme} onClick={() => setTheme("dark")  }><Moon          size={14} /></ToggleButton>
         </div>
     );
 }
