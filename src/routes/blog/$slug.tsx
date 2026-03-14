@@ -1,34 +1,36 @@
-import { Link, createFileRoute, notFound } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { sortedPosts } from "@/data/sorted-posts.ts";
 import { Panel, PanelHeader, PanelSection } from "@/components/main-panel";
 import { DitheredBackground } from "@/components/dithered-background.tsx";
-import { Button } from "@/components/ui/button.tsx";
 import { MDX } from "@/components/mdx.tsx";
+import { LinkButton } from "@/components/ui/link-button.tsx";
 
 const findPage = (pathArr: Array<string>) => {
-    const path = pathArr.length > 0 ? `${pathArr.join('/')}` : '/';
+    const path = pathArr.length > 0 ? `${pathArr.join("/")}` : "/";
     return sortedPosts.find((post) => post.slug === path);
-}
+};
 
-const findPrevPage = (currPage: any)=> {
+const findPrevPage = (currPage: any) => {
     const currIndex = sortedPosts.indexOf(currPage);
 
     if (currIndex == 0) return false;
-    return {...sortedPosts[currIndex - 1]};
-}
+    return { ...sortedPosts[currIndex - 1] };
+};
 
 const findNextPage = (currPage: any) => {
     const currIndex = sortedPosts.indexOf(currPage);
 
     if (currIndex >= sortedPosts.length - 1) return false;
-    return {...sortedPosts[currIndex + 1]};
-}
+    return { ...sortedPosts[currIndex + 1] };
+};
 
-export const Route = createFileRoute('/blog/$slug')({
+export const Route = createFileRoute("/blog/$slug")({
     component: PostPage,
     loader: async ({ params }) => {
-        const pathSegments = params.slug ? params.slug.split('/').filter(Boolean) : []
+        const pathSegments = params.slug
+            ? params.slug.split("/").filter(Boolean)
+            : [];
         const page = findPage(pathSegments);
         const nextPage = findNextPage(page);
         const prevPage = findPrevPage(page);
@@ -37,12 +39,12 @@ export const Route = createFileRoute('/blog/$slug')({
             throw notFound();
         }
 
-        return { page, prevPage, nextPage }
+        return { page, prevPage, nextPage };
     },
-})
+});
 
 function PostPage() {
-    const { page, prevPage, nextPage } = Route.useLoaderData()
+    const { page, prevPage, nextPage } = Route.useLoaderData();
 
     return (
         <>
@@ -65,47 +67,38 @@ function PostPage() {
             </DitheredBackground>
             <Panel>
                 <PanelSection className="flex">
-                    <Button
-                        asChild
+                    <LinkButton
+                        to="/blog"
                         variant="secondary"
                         size="sm"
                         aria-label="Go Back"
                     >
-                        <Link to="/blog">
-                            <ArrowLeft size={20} className="inline" /> Blog
-                        </Link>
-                    </Button>
+                        <ArrowLeft size={20} className="inline" /> Blog
+                    </LinkButton>
                     <div className="flex-1"></div>
                     <div className="flex gap-2">
                         {typeof prevPage === "object" && (
-                            <Button
-                                asChild
+                            <LinkButton
+                                to="/blog/$slug"
+                                params={{ slug: prevPage.slug }}
                                 variant="secondary"
                                 size="icon-sm"
-                                aria-label="Prev Page"
+                                aria-label="Previous Page"
                             >
-                                <Link
-                                    to="/blog/$slug"
-                                    params={{ slug: prevPage.slug }}
-                                >
-                                    <ArrowLeft />
-                                </Link>
-                            </Button>
+                                <ArrowLeft />
+                            </LinkButton>
                         )}
                         {typeof nextPage === "object" && (
-                            <Button
-                                asChild
-                                variant="secondary"
-                                size="icon-sm"
-                                aria-label="Next Page"
-                            >
-                                <Link
-                                    to="/blog/$slug"
-                                    params={{ slug: nextPage.slug }}
-                                >
-                                    <ArrowRight />
-                                </Link>
-                            </Button>
+
+                            <LinkButton
+                            to="/blog/$slug"
+                            params={{ slug: nextPage.slug }}
+                        variant="secondary"
+                        size="icon-sm"
+                        aria-label="Previous Page"
+                    >
+                        <ArrowRight />
+                    </LinkButton>
                         )}
                     </div>
                 </PanelSection>
