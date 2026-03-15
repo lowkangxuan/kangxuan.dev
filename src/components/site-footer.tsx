@@ -1,4 +1,4 @@
-import { DitheredBackground } from "@/components/dithered-background.tsx";
+import { DitheredBackground } from "@/components/ui/dithered-background.tsx";
 import { Panel, PanelSection } from "@/components/main-panel";
 
 export function SiteFooter() {

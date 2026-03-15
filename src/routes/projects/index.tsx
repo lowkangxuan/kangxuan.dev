@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { DitheredBackground } from "@/components/dithered-background.tsx";
+import { DitheredBackground } from "@/components/ui/dithered-background.tsx";
 import { Panel, PanelHeader, PanelSection } from "@/components/main-panel";
 import { PROJECTS } from "@/data/projects.ts";
 import { GridItem } from "@/components/grid-item-list/grid-item.tsx";

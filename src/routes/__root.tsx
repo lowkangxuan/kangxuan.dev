@@ -11,7 +11,7 @@ import { THEME_COOKIE_NAME } from "@/integrations/theme/constants";
 import { getThemeFromCookie } from "@/integrations/theme/utils";
 import { SiteFooter } from "@/components/site-footer.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
-import { DitheredBackground } from "@/components/dithered-background.tsx";
+import { DitheredBackground } from "@/components/ui/dithered-background.tsx";
 
 export const Route = createRootRoute({
     loader: async () => {

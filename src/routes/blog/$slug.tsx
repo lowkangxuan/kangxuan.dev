@@ -2,7 +2,7 @@ import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { sortedPosts } from "@/data/sorted-posts.ts";
 import { Panel, PanelHeader, PanelSection } from "@/components/main-panel";
-import { DitheredBackground } from "@/components/dithered-background.tsx";
+import { DitheredBackground } from "@/components/ui/dithered-background.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { MDX } from "@/components/mdx.tsx";
 
