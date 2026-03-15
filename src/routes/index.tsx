@@ -1,4 +1,6 @@
-import { createFileRoute, useLoaderData } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/react-start";
+import { z } from "zod";
 import { Experience } from "@/features/home/experience";
 import { Education } from "@/features/home/education";
 import { Profile } from "@/features/home/profile";
@@ -7,8 +9,6 @@ import { DitheredBackground } from "@/components/dithered-background.tsx";
 import { BlogSection } from "@/features/home/blog-section.tsx";
 import { Skills } from "@/features/home/skills";
 import { ProjectsSection } from "@/features/home/projects-section.tsx";
-import { createServerFn } from "@tanstack/react-start";
-import { z } from "zod";
 
 type Activity = {
     date: string
@@ -54,7 +54,7 @@ export const Route = createFileRoute("/")({
 
 function App() {
     const {contributions} = Route.useLoaderData();
-    console.log(contributions);
+
     return (
         <div>
             <DitheredBackground />
