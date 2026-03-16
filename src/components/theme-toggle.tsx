@@ -14,7 +14,7 @@ export function ModeToggle() {
 
     return (
         <div className="flex rounded-full bg-secondary p-0.5">
-            <ToggleButton theme="system"  currentTheme={theme} onClick={() => setTheme("system")}><LaptopMinimal size={14} /></ToggleButton>
+            {/*<ToggleButton theme="system"  currentTheme={theme} onClick={() => setTheme("system")}><LaptopMinimal size={14} /></ToggleButton>*/}
             <ToggleButton theme="light"   currentTheme={theme} onClick={() => setTheme("light") }><Sun           size={14} /></ToggleButton>
             <ToggleButton theme="dark"    currentTheme={theme} onClick={() => setTheme("dark")  }><Moon          size={14} /></ToggleButton>
         </div>

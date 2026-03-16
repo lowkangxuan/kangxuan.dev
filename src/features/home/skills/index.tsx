@@ -6,21 +6,21 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { useTheme } from "@/hooks/theme-provider.tsx";
 
 export function Skills() {
-    const {normalizedTheme} = useTheme();
+    const {theme} = useTheme();
 
     useEffect(() => {
-        console.log("theme", normalizedTheme);
-    }, [normalizedTheme]);
+        console.log("theme", theme);
+    }, [theme]);
 
     return (
         <Panel>
             <PanelHeader>Skills</PanelHeader>
             <PanelSection className="flex gap-4 flex-wrap">
-                {normalizedTheme !== "system" && STACK_DATA.map((stack) => {
+                {STACK_DATA.map((stack) => {
                     return (
                         <Tooltip key={stack.key}>
                             <TooltipTrigger>
-                                <StackIcon name={stack.key} className="size-8" variant={normalizedTheme} />
+                                <StackIcon name={stack.key} className="size-8" variant={theme} />
                             </TooltipTrigger>
                             <TooltipContent>
                                 {stack.name}

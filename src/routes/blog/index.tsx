@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { allPosts } from "content-collections";
 import { Panel, PanelHeader, PanelSection } from "@/components/main-panel";
-import { DitheredBackground } from "@/components/dithered-background.tsx";
 import { BlogList } from "@/components/blog-list.tsx";
 
 export const Route = createFileRoute("/blog/")({
@@ -11,7 +10,6 @@ export const Route = createFileRoute("/blog/")({
 function BlogIndex() {
     return (
         <>
-            <DitheredBackground />
             <Panel>
                 <PanelHeader>Blog</PanelHeader>
                 <PanelSection>

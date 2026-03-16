@@ -63,13 +63,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             </head>
             <body>
                 <ThemeProvider
-                    defaultTheme="system"
+                    defaultTheme="light"
                     storageKey={THEME_COOKIE_NAME}
                 >
                     <TooltipProvider>
                         <SiteHeader />
                         <main className="max-w-dvw px-2 overflow-hidden">
                             <div className="md:max-w-3xl mx-auto">
+                                <DitheredBackground />
                                 {children}
                                 <DitheredBackground />
                             </div>

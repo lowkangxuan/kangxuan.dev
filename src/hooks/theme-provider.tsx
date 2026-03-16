@@ -9,7 +9,8 @@ import {
     THEME_COOKIE_NAME,
 } from "../integrations/theme/constants.tsx";
 
-type Theme = "dark" | "light" | "system";
+// type Theme = "dark" | "light" | "system";
+type Theme = "dark" | "light";
 
 type ThemeProviderProps = {
     children: React.ReactNode;
@@ -19,7 +20,6 @@ type ThemeProviderProps = {
 
 type ThemeProviderState = {
     theme: Theme;
-    normalizedTheme: Theme;
     setTheme: (theme: Theme) => void;
 };
 
@@ -49,12 +49,11 @@ const setCookie = (
 
 export function ThemeProvider({
                                   children,
-                                  defaultTheme = "system",
+                                  defaultTheme = "light",
                                   storageKey = "vite-ui-theme",
                                   ...props
                               }: ThemeProviderProps) {
     const [theme, setTheme] = useState<Theme>(defaultTheme);
-    const [normalizedTheme, setNormalizedTheme] = useState<Theme>(defaultTheme); // To get light/dark based on system
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
@@ -63,13 +62,12 @@ export function ThemeProvider({
 
         if (savedTheme) {
             setTheme(savedTheme);
-            if (savedTheme != "system") setNormalizedTheme(savedTheme);
         } else {
             // First visit - set to system theme so it can respond to OS changes
-            setTheme("system");
+            setTheme("light");
 
             // Store the system preference in cookie only
-            setCookie(THEME_COOKIE_NAME, "system");
+            setCookie(THEME_COOKIE_NAME, "light");
         }
     }, [defaultTheme]);
 
@@ -79,22 +77,22 @@ export function ThemeProvider({
         const root = window.document.documentElement;
         root.classList.remove(THEME_CLASSES.LIGHT, THEME_CLASSES.DARK, "system");
 
-        if (theme === "system") {
-            const systemTheme = window.matchMedia(DARK_MODE_MEDIA_QUERY).matches
-                ? THEME_CLASSES.DARK
-                : THEME_CLASSES.LIGHT;
-
-            setNormalizedTheme(systemTheme);
-            root.classList.add(systemTheme);
-            return;
-        }
+        // if (theme === "system") {
+        //     const systemTheme = window.matchMedia(DARK_MODE_MEDIA_QUERY).matches
+        //         ? THEME_CLASSES.DARK
+        //         : THEME_CLASSES.LIGHT;
+        //
+        //     setNormalizedTheme(systemTheme);
+        //     root.classList.add(systemTheme);
+        //     return;
+        // }
 
         root.classList.add(theme);
     }, [theme, mounted]);
 
     // Listen for system preference changes when theme is "system"
     useEffect(() => {
-        if (!mounted || theme !== "system") return;
+        if (!mounted) return;
 
         const mediaQuery = window.matchMedia(DARK_MODE_MEDIA_QUERY);
 
@@ -106,7 +104,6 @@ export function ThemeProvider({
                 ? THEME_CLASSES.DARK
                 : THEME_CLASSES.LIGHT;
 
-            setNormalizedTheme(systemTheme);
             root.classList.add(systemTheme);
         };
 
@@ -117,7 +114,6 @@ export function ThemeProvider({
 
     const value = {
         theme,
-        normalizedTheme,
         setTheme: (newTheme: Theme) => {
             setCookie(THEME_COOKIE_NAME, newTheme);
             setTheme(newTheme);
