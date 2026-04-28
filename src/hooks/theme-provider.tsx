@@ -63,7 +63,7 @@ export function ThemeProvider({
         if (savedTheme) {
             setTheme(savedTheme);
         } else {
-            // First visit - set to system theme so it can respond to OS changes
+            // First visit - set to light theme
             setTheme("light");
 
             // Store the system preference in cookie only
@@ -75,17 +75,7 @@ export function ThemeProvider({
         if (!mounted) return;
 
         const root = window.document.documentElement;
-        root.classList.remove(THEME_CLASSES.LIGHT, THEME_CLASSES.DARK, "system");
-
-        // if (theme === "system") {
-        //     const systemTheme = window.matchMedia(DARK_MODE_MEDIA_QUERY).matches
-        //         ? THEME_CLASSES.DARK
-        //         : THEME_CLASSES.LIGHT;
-        //
-        //     setNormalizedTheme(systemTheme);
-        //     root.classList.add(systemTheme);
-        //     return;
-        // }
+        root.classList.remove(THEME_CLASSES.LIGHT, THEME_CLASSES.DARK);
 
         root.classList.add(theme);
     }, [theme, mounted]);

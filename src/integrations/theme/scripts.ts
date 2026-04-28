@@ -25,14 +25,12 @@ export const themeScript = `
 		root.classList.remove(THEME_CLASSES.LIGHT, THEME_CLASSES.DARK);
 		
 		if (!theme) {
-			// First visit - store as system theme
-			resolvedTheme = window.matchMedia(DARK_MODE_MEDIA_QUERY).matches ? THEME_CLASSES.DARK : THEME_CLASSES.LIGHT;
+			// First visit - default to light theme
+			resolvedTheme = THEME_CLASSES.LIGHT;
 			
-			// Set cookie with system preference
+			// Set cookie with light preference
 			const expires = new Date(Date.now() + COOKIE_EXPIRY_DAYS * MILLISECONDS_PER_DAY).toUTCString();
-			document.cookie = THEME_COOKIE_NAME + '=system; expires=' + expires + '; path=/; SameSite=Lax';
-		} else if (theme === 'system') {
-			resolvedTheme = window.matchMedia(DARK_MODE_MEDIA_QUERY).matches ? THEME_CLASSES.DARK : THEME_CLASSES.LIGHT;
+			document.cookie = THEME_COOKIE_NAME + '=' + THEME_CLASSES.LIGHT + '; expires=' + expires + '; path=/; SameSite=Lax';
 		} else {
 			resolvedTheme = theme;
 		}
