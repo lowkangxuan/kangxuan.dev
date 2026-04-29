@@ -13,13 +13,13 @@ export function Profile() {
                     <img
                         src={img}
                         alt="cover"
-                        className="md:size-38 size-32 bg-background rounded-2xl ring ring-offset-4 ring-border ring-offset-background"
+                        className="md:size-38 size-24 bg-background rounded-2xl ring ring-offset-4 ring-border ring-offset-background"
                     />
                     <div className="flex flex-col self-end gap-1 text-muted-foreground text-sm">
-                        <h1 className="font-bold text-3xl tracking-tight text-primary">
+                        <h1 className="font-bold text-2xl sm:text-3xl tracking-tight text-primary">
                             Low Kang Xuan
                         </h1>
-                        <span className="flex gap-2">
+                        <div className="gap-2 hidden sm:flex">
                             <span className="flex items-center gap-1.5">
                                 <MapPin className="inline" size="18" />{" "}
                                 Singapore
@@ -28,8 +28,8 @@ export function Profile() {
                             <span>
                                 <CurrentTime />
                             </span>
-                        </span>
-                        <div className="flex gap-2">
+                        </div>
+                        <div className="gap-2 hidden sm:flex">
                             {SOCIAL_LINKS.map((link) => {
                                 return (
                                     <Tooltip key={link.name}>
@@ -43,6 +43,32 @@ export function Profile() {
                                 );
                             })}
                         </div>
+                    </div>
+                </div>
+                <div className="flex flex-col gap-1 text-muted-foreground sm:hidden">
+                    <div className="gap-2 flex text-sm">
+                            <span className="flex items-center gap-1.5">
+                                <MapPin className="inline" size="18" />{" "}
+                                Singapore
+                            </span>
+                        <span>•</span>
+                        <span>
+                                <CurrentTime />
+                            </span>
+                    </div>
+                    <div className="gap-2 flex">
+                        {SOCIAL_LINKS.map((link) => {
+                            return (
+                                <Tooltip key={link.name}>
+                                    <TooltipTrigger asChild>
+                                        <a href={link.href} target="_blank" rel="noopener noreferrer" className="">{link.icon}</a>
+                                    </TooltipTrigger>
+                                    <TooltipContent side="top">
+                                        {link.name}
+                                    </TooltipContent>
+                                </Tooltip>
+                            );
+                        })}
                     </div>
                 </div>
                 <div className="text-sm">

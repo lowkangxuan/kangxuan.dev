@@ -53,7 +53,7 @@ export const Route = createFileRoute("/")({
 
 function App() {
     const {contributions} = Route.useLoaderData();
-
+    console.log(contributions);
     return (
         <div>
             <Profile />
