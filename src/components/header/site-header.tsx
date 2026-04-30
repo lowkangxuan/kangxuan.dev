@@ -1,5 +1,5 @@
 import { Link, linkOptions } from "@tanstack/react-router";
-import { ModeToggle } from "@/components/theme-toggle.tsx";
+import { ThemeToggle } from "@/components/theme-toggle.tsx";
 import { MobileHeader } from "@/components/header/mobile-header.tsx";
 import { navLinks } from "@/data/nav-links.ts";
 import { SearchMenu } from "@/components/search-menu.tsx";
@@ -25,7 +25,7 @@ export function SiteHeader() {
                 <div className="flex-1"></div>
                 <div className="flex gap-4">
                     <SearchMenu />
-                    <ModeToggle />
+                    <ThemeToggle />
                     <MobileHeader className="sm:hidden" />
                 </div>
             </div>

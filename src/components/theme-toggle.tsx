@@ -1,22 +1,22 @@
-import { LaptopMinimal, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/hooks/theme-provider.tsx";
+import { Button } from "@/components/ui/button.tsx";
 
-function ToggleButton({theme, currentTheme, children, onClick}) {
-    return (
-        <button data-selected={theme === currentTheme ? "true" : undefined} onClick={onClick} className="rounded-full border border-transparent p-1.5 dark:data-selected:bg-muted-foreground/15 dark:data-selected:border-muted-foreground/30 data-selected:bg-background data-selected:border-border">
-            {children}
-        </button>
-    )
-}
-
-export function ModeToggle() {
+export function ThemeToggle() {
     const { theme, setTheme } = useTheme();
 
+    function onClick() {
+        if (theme === "light") {
+            setTheme("dark");
+        }
+        else {
+            setTheme("light");
+        }
+    }
+
     return (
-        <div className="flex rounded-full bg-secondary p-0.5">
-            {/*<ToggleButton theme="system"  currentTheme={theme} onClick={() => setTheme("system")}><LaptopMinimal size={14} /></ToggleButton>*/}
-            <ToggleButton theme="light"   currentTheme={theme} onClick={() => setTheme("light") }><Sun           size={14} /></ToggleButton>
-            <ToggleButton theme="dark"    currentTheme={theme} onClick={() => setTheme("dark")  }><Moon          size={14} /></ToggleButton>
-        </div>
+        <Button variant="outline" size="icon-lg" onClick={onClick} className="rounded-full dark:bg-background dark:hover:bg-primary-foreground text-muted-foreground shadow-md">
+            {theme === "light" ? <Sun size={14} /> : <Moon size={16} />}
+        </Button>
     );
 }

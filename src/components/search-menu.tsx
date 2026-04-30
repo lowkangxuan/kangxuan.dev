@@ -45,9 +45,22 @@ export function SearchMenu() {
 
     return (
         <>
-            <Button variant="outline" size="sm" className="rounded-full text-muted-foreground" onClick={() => setOpen(true)}>
-                <Search /> Search...
-                <div className="flex gap-1 max-md:hidden">
+            <Button
+                variant="outline"
+                size="icon-lg"
+                className="rounded-full dark:bg-background dark:hover:bg-primary-foreground text-muted-foreground md:hidden shadow-md"
+                onClick={() => setOpen(true)}
+            >
+                <Search />
+            </Button>
+            <Button
+                variant="outline"
+                size="lg"
+                className="rounded-full dark:bg-background dark:hover:bg-primary-foreground text-muted-foreground max-md:hidden shadow-md"
+                onClick={() => setOpen(true)}
+            >
+                <Search />
+                <div className="flex gap-1">
                     <Kbd>⌘</Kbd>
                     <Kbd>K</Kbd>
                 </div>

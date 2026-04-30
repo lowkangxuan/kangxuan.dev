@@ -12,6 +12,7 @@ import { getThemeFromCookie } from "@/integrations/theme/utils";
 import { SiteFooter } from "@/components/site-footer.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { DitheredBackground } from "@/components/dithered-background.tsx";
+import { SiteNav } from "@/components/site-nav.tsx";
 
 export const Route = createRootRoute({
     loader: async () => {
@@ -67,7 +68,17 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                     storageKey={THEME_COOKIE_NAME}
                 >
                     <TooltipProvider>
-                        <SiteHeader />
+                        <div
+                            className="
+    pointer-events-none fixed inset-x-0 bottom-0 z-[500]
+    h-24
+    bg-gradient-to-t from-background/90 via-background/50 to-transparent
+    backdrop-blur-[2px]
+    [mask-image:linear-gradient(to_top,black_0%,black_35%,transparent_100%)]
+    [-webkit-mask-image:linear-gradient(to_top,black_0%,black_35%,transparent_100%)]
+  "
+                        />
+                        <SiteNav />
                         <main className="max-w-dvw px-2 overflow-hidden">
                             <div className="md:max-w-3xl mx-auto">
                                 <DitheredBackground />
@@ -76,6 +87,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                             </div>
                         </main>
                         <SiteFooter />
+                        <div className="pt-24"></div>
                     </TooltipProvider>
                 </ThemeProvider>
                 <TanStackDevtools
