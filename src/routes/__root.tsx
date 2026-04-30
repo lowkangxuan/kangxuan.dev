@@ -68,16 +68,16 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                     storageKey={THEME_COOKIE_NAME}
                 >
                     <TooltipProvider>
-                        <div
-                            className="
-    pointer-events-none fixed inset-x-0 bottom-0 z-[500]
-    h-24
-    bg-gradient-to-t from-background/90 via-background/50 to-transparent
-    backdrop-blur-[2px]
-    [mask-image:linear-gradient(to_top,black_0%,black_35%,transparent_100%)]
-    [-webkit-mask-image:linear-gradient(to_top,black_0%,black_35%,transparent_100%)]
-  "
-                        />
+  {/*                      <div*/}
+  {/*                          className="*/}
+  {/*  pointer-events-none fixed inset-x-0 bottom-0 z-[500]*/}
+  {/*  h-24*/}
+  {/*  bg-gradient-to-t from-background/90 via-background/50 to-transparent*/}
+  {/*  backdrop-blur-[2px]*/}
+  {/*  [mask-image:linear-gradient(to_top,black_0%,black_35%,transparent_100%)]*/}
+  {/*  [-webkit-mask-image:linear-gradient(to_top,black_0%,black_35%,transparent_100%)]*/}
+  {/*"*/}
+  {/*                      />*/}
                         <SiteNav />
                         <main className="max-w-dvw px-2 overflow-hidden">
                             <div className="md:max-w-3xl mx-auto">
