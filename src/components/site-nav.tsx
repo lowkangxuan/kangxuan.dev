@@ -5,7 +5,7 @@ import { SearchMenu } from "@/components/search-menu.tsx";
 
 export function SiteNav() {
     return (
-        <div className="flex fixed items-center bottom-6 left-[50%] translate-x-[-50%] gap-2 z-[999]">
+        <div className="flex fixed items-center bottom-4 md:bottom-6 left-[50%] translate-x-[-50%] gap-2 z-[999]">
             <ThemeToggle />
             <div className="flex bg-background px-4 rounded-full border items-center max-h-10 shadow-md">
                 {navLinks.map((nav) => {

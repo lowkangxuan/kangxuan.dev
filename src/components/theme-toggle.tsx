@@ -15,7 +15,7 @@ export function ThemeToggle() {
     }
 
     return (
-        <Button variant="outline" size="icon-lg" onClick={onClick} className="rounded-full dark:bg-background dark:hover:bg-primary-foreground text-muted-foreground shadow-md">
+        <Button variant="outline" size="icon-lg" onClick={onClick} className="rounded-full dark:bg-background dark:hover:bg-primary-foreground text-muted-foreground shadow-md transition-none">
             {theme === "light" ? <Sun size={14} /> : <Moon size={16} />}
         </Button>
     );

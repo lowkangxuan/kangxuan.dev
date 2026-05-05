@@ -60,7 +60,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                     href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
                     rel="stylesheet"
                 />
-                {/*<script dangerouslySetInnerHTML={{ __html: themeScript }} />*/}
             </head>
             <body>
                 <ThemeProvider
@@ -72,7 +71,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                             className="
     pointer-events-none fixed inset-x-0 bottom-0 z-[500]
     h-24
-    bg-gradient-to-t from-background/90 via-background/50 to-transparent
+    bg-gradient-to-t from-background via-background/50 to-transparent
     backdrop-blur-[2px]
     [mask-image:linear-gradient(to_top,black_0%,black_35%,transparent_100%)]
     [-webkit-mask-image:linear-gradient(to_top,black_0%,black_35%,transparent_100%)]

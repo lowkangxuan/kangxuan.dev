@@ -15,7 +15,7 @@ function RouteComponent() {
                 <PanelHeader>Projects</PanelHeader>
                 <PanelSection>
                     <span className="text-sm text-muted-foreground">
-                        Proudly completed projects over the year.
+                        Proudly completed projects over the years.
                     </span>
                 </PanelSection>
             </Panel>

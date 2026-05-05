@@ -48,7 +48,7 @@ export function SearchMenu() {
             <Button
                 variant="outline"
                 size="icon-lg"
-                className="rounded-full dark:bg-background dark:hover:bg-primary-foreground text-muted-foreground md:hidden shadow-md"
+                className="rounded-full dark:bg-background dark:hover:bg-primary-foreground text-muted-foreground md:hidden shadow-md transition-none"
                 onClick={() => setOpen(true)}
             >
                 <Search />
@@ -56,7 +56,7 @@ export function SearchMenu() {
             <Button
                 variant="outline"
                 size="lg"
-                className="rounded-full dark:bg-background dark:hover:bg-primary-foreground text-muted-foreground max-md:hidden shadow-md"
+                className="rounded-full dark:bg-background dark:hover:bg-primary-foreground text-muted-foreground max-md:hidden shadow-md transition-none"
                 onClick={() => setOpen(true)}
             >
                 <Search />

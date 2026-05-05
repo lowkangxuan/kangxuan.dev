@@ -8,6 +8,7 @@ import { GithubActivity } from "@/features/home/github-activity.tsx";
 import { BlogSection } from "@/features/home/blog-section.tsx";
 import { Skills } from "@/features/home/skills";
 import { ProjectsSection } from "@/features/home/projects-section.tsx";
+import { PanelSeparator } from "@/components/main-panel/panel-separator.tsx";
 
 type Activity = {
     date: string
@@ -53,7 +54,7 @@ export const Route = createFileRoute("/")({
 
 function App() {
     const {contributions} = Route.useLoaderData();
-    console.log(contributions);
+
     return (
         <div>
             <Profile />
@@ -81,6 +82,6 @@ function App() {
 
 function Separator() {
     return (
-        <div className="h-8 border-x"></div>
+        <div className="relative flex h-8 w-full border-x border-line before:absolute before:left-[-100vw] before:-z-1 before:h-8 before:w-[200vw] before:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_1px,transparent_0,transparent_50%)] before:bg-size-[10px_10px] before:[--pattern-foreground:var(--border)]/56"></div>
     )
 }

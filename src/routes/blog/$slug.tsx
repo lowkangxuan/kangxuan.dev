@@ -95,7 +95,7 @@ function PostPage() {
                     </div>
                 </PanelSection>
                 <article className="w-full max-w-3xl mx-auto">
-                    <PanelHeader className="flex flex-col gap-1">
+                    <PanelHeader className="flex flex-col gap-1 line-before">
                         {page.title}
                     </PanelHeader>
                     <PanelSection className="dark:bg-background">

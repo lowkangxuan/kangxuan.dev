@@ -20,15 +20,23 @@ interface GridItemProps {
     link: LinkProps
 }
 
-export function GridItem({ title, description, thumbnailUrl, date, link }: GridItemProps) {
+export function GridItem({ title, description, thumbnailUrl, date, link } : GridItemProps) {
     return (
-        <div className="p-1 bg-muted odd:line-before odd:line-after">
+        <div className="p-3 border-b">
             <Link
                 to={link.to}
                 {...("params" in link ? { params: link.params } : {})}
                 {...(link.newTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="flex flex-col h-full gap-2 p-2 bg-background dark:bg-background/65 rounded-xl border border-muted-foreground/30"
+                className="flex flex-col group h-full gap-2 p-2 bg-background dark:bg-background/65 rounded-xl border border-muted-foreground/30"
             >
+                <div className="flex flex-col gap-2 px-2 py-1 text-xs text-muted-foreground">
+                    <div className="flex justify-between items-center">
+                        <h2 className="font-bold text-base text-primary max-w-52">
+                            {title}
+                        </h2>
+                        {date && <span>{date}</span>}
+                    </div>
+                </div>
                 <div className="rounded-lg overflow-hidden border bg-muted aspect-video">
                     {thumbnailUrl ? (
                         <img
@@ -40,15 +48,6 @@ export function GridItem({ title, description, thumbnailUrl, date, link }: GridI
                     ) : (
                         <div className="bg-muted h-full w-full" />
                     )}
-                </div>
-                <div className="flex flex-col gap-2 px-2 text-xs text-muted-foreground">
-                    <div className="flex justify-between items-center">
-                        <h2 className="font-bold text-base text-primary max-w-52">
-                            {title}
-                        </h2>
-                        {date && <span>{date}</span>}
-                    </div>
-                    {description && <p>{description}</p>}
                 </div>
             </Link>
         </div>

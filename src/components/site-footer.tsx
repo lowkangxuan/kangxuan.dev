@@ -11,7 +11,14 @@ export function SiteFooter() {
                         </span>
                         <div className="flex ml-auto">
                             {SOCIAL_LINKS.map((link) => (
-                                <a href={link.href} target="_blank" rel="noopener noreferrer" className="p-2 sm:p-3 border-l border-border">{link.icon}</a>
+                                <a href={link.href}
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   className="p-2 sm:p-3 border-l border-border"
+                                   key={link.name}
+                                >
+                                    {link.icon}
+                                </a>
                             ))}
                         </div>
                     </div>
