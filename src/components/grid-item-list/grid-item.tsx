@@ -30,8 +30,8 @@ export function GridItem({ title, description, thumbnailUrl, date, link } : Grid
                 className="flex flex-col group h-full gap-2 p-2 bg-background dark:bg-background/65 rounded-xl border border-muted-foreground/30"
             >
                 <div className="flex flex-col gap-2 px-2 py-1 text-xs text-muted-foreground">
-                    <div className="flex justify-between items-center">
-                        <h2 className="font-bold text-base text-primary max-w-52">
+                    <div className="flex flex-col gap-1 justify-between">
+                        <h2 className="font-bold text-base text-primary max-w-52 leading-tight">
                             {title}
                         </h2>
                         {date && <span>{date}</span>}

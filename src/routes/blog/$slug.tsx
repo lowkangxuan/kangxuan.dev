@@ -5,6 +5,7 @@ import { Panel, PanelHeader, PanelSection } from "@/components/main-panel";
 import { Button } from "@/components/ui/button.tsx";
 import { MDX } from "@/components/mdx.tsx";
 import img from "@/features/home/profile/cover.jpeg";
+import { format, parseISO } from "date-fns";
 
 const findPage = (pathArr: Array<string>) => {
     const path = pathArr.length > 0 ? `${pathArr.join("/")}` : "/";
@@ -45,11 +46,12 @@ export const Route = createFileRoute("/blog/$slug")({
 
 function PostPage() {
     const { page, prevPage, nextPage } = Route.useLoaderData();
+    const formattedDate = format(parseISO(page.published), "MMMM dd, yyyy");
 
     return (
         <>
             <Panel>
-                <PanelSection className="flex">
+                <PanelSection className="flex line-after">
                     <Button
                         asChild
                         variant="secondary"
@@ -95,19 +97,33 @@ function PostPage() {
                     </div>
                 </PanelSection>
                 <article className="w-full max-w-3xl mx-auto">
-                    <PanelHeader className="flex flex-col gap-1 line-before">
-                        {page.title}
-                    </PanelHeader>
                     <PanelSection className="dark:bg-background">
                         {page.thumbnail && (
-                            <div className="flex justify-center p-4 min-w-0">
+                            <figure className="flex justify-center mb-8 p-4 min-w-0">
                                 <img
                                     src={page.thumbnailUrl}
                                     alt={page.title}
                                     className="aspect-video object-cover bg-background rounded-xl ring ring-offset-4 ring-border ring-offset-background border border-muted-foreground/30"
                                 />
-                            </div>
+                            </figure>
                         )}
+
+                        <header>
+                            <h1 className="text-2xl font-semibold mb-2">
+                                {page.title}
+                            </h1>
+                            <div className="mb-2 text-sm text-muted-foreground">
+                                <span>{formattedDate}</span>
+                            </div>
+                            <ul className="flex gap-2">
+                                {page.tags?.map((tag) => (
+                                    <li key={tag} className="bg-muted border-1 border-muted-foreground/30 rounded-sm text-xs text-muted-foreground px-2 py-1 before:content-['#'] before:mr-0.5">
+                                        {tag}
+                                    </li>
+                                )) || ""}
+                            </ul>
+                        </header>
+
                         <MDX content={page.mdx} />
                     </PanelSection>
                 </article>
