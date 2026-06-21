@@ -8,10 +8,13 @@ export const EDUCATION_DATA: Array<EducationData> = [
         from: "08.2025",
         to: "present",
         description: `
-- Learnt the basics of Computer Architecture.
-- Exposed to Data Structures & Algorithms.
+Relevant Courseworks:
+- SC1003: Introduction to Computational Thinking & Programming
+- SC1006: Computer Organisation & Architecture
+- SC1007: Data Structures & Algorithms
+- SC2002: Object Oriented Design & Programming
 `,
-        skills: ["Python", "Java", "C/C++", "Data Structures", "Algorithms"],
+        skills: ["Python", "Java", "Data Structures", "Algorithms"],
     },
     {
         name: "Ngee Ann Polytechnic",
@@ -21,9 +24,11 @@ export const EDUCATION_DATA: Array<EducationData> = [
         to: "04.2023",
         description: `
 - Director's List for Excellent Academic Performance 2020.
+
+Relevant Coursework:
+- Interactive Development
 - Best Performance in the module Interactive Development.
-- Took up the Interactive Development module and applied knowledge learnt to develop full-stack web applications.
 `,
-        skills: ["HTML", "CSS", "JavaScript", "Python", "CSharp", "Unity Game Engine", "Game Design and Development", "UI/UX Design"],
+        skills: ["HTML", "CSS", "JavaScript", "Python", "UI/UX Design"],
     }
 ]

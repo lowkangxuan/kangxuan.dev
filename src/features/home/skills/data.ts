@@ -47,5 +47,17 @@ export const STACK_DATA: Array<stackData> = [
     {
         key: "github",
         name: "GitHub",
+    },
+    {
+        key: "postgresql",
+        name: "PostgreSQL"
+    },
+    {
+        key: "neon",
+        name: "Neon"
+    },
+    {
+        key: "drizzle",
+        name: "Drizzle ORM"
     }
 ]
