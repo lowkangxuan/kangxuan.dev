@@ -9,10 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import {
-  InputGroup,
-  InputGroupAddon,
-} from "@/components/ui/input-group"
 import { SearchIcon, CheckIcon, ArrowUp, ArrowDown } from "lucide-react"
 import { Kbd, KbdGroup } from "./kbd"
 
@@ -122,7 +118,7 @@ function CommandList({
     <CommandPrimitive.List
       data-slot="command-list"
       className={cn(
-        "bg-popover border rounded-xl shadow-md overscroll-none max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto",
+        "bg-popover border rounded-xl shadow-md overscroll-none max-h-75 scroll-py-1 overflow-x-hidden overflow-y-auto",
         className
       )}
       {...props}
