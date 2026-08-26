@@ -33,8 +33,10 @@ export function Profile() {
                             {SOCIAL_LINKS.map((link) => {
                                 return (
                                     <Tooltip key={link.name}>
-                                        <TooltipTrigger asChild>
-                                            <a href={link.href} target="_blank" rel="noopener noreferrer" className="">{link.icon}</a>
+                                        <TooltipTrigger
+                                            render={<a href={link.href} target="_blank" rel="noopener noreferrer" />}
+                                        >
+                                            {link.icon}
                                         </TooltipTrigger>
                                         <TooltipContent side="top">
                                             {link.name}
@@ -60,8 +62,10 @@ export function Profile() {
                         {SOCIAL_LINKS.map((link) => {
                             return (
                                 <Tooltip key={link.name}>
-                                    <TooltipTrigger asChild>
-                                        <a href={link.href} target="_blank" rel="noopener noreferrer" className="">{link.icon}</a>
+                                    <TooltipTrigger
+                                        render={<a href={link.href} target="_blank" rel="noopener noreferrer" />}
+                                    >
+                                        {link.icon}
                                     </TooltipTrigger>
                                     <TooltipContent side="top">
                                         {link.name}

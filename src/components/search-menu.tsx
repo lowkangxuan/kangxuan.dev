@@ -6,7 +6,7 @@ import {
     Search,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button.tsx";
 import { Kbd } from "@/components/ui/kbd.tsx";
 import {
@@ -18,7 +18,7 @@ import {
     CommandItem,
     CommandList,
 } from "@/components/ui/command.tsx";
-import {navLinks} from "@/data/nav-links.ts";
+import { navLinks } from "@/data/nav-links.ts";
 import { sortedPosts } from "@/data/sorted-posts.ts";
 import { PROJECTS } from "@/data/projects.ts";
 
@@ -30,9 +30,10 @@ const menuIcons = {
 
 export function SearchMenu() {
     const [open, setOpen] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const down = (e) => {
+        const down = (e: KeyboardEvent) => {
             if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
                 e.preventDefault()
                 setOpen((open) => !open)
@@ -66,18 +67,24 @@ export function SearchMenu() {
                 </div>
             </Button>
             <CommandDialog open={open} onOpenChange={setOpen}>
-                <Command className="min-h-[26rem] gap-4">
+                <Command className="min-h-104 gap-4">
                     <CommandInput placeholder="Type a command or search..." />
                     <CommandList>
                         <CommandEmpty>No results found.</CommandEmpty>
                         <CommandGroup heading="Menu">
                             {navLinks.map(link => {
                                 return (
-                                    <CommandItem asChild key={link.key}>
-                                        <Link to={link.to} onClick={() => setOpen(false)}>
-                                            {menuIcons[link.key]}
-                                            {link.label}
-                                        </Link>
+                                    <CommandItem
+                                        key={link.key}
+                                        onSelect={() => {
+                                            navigate({
+                                                to: link.to,
+                                            });
+                                            setOpen(false);
+                                        }}
+                                    >
+                                        {menuIcons[link.key]}
+                                        {link.label}
                                     </CommandItem>
                                 );
                             })}
@@ -85,11 +92,14 @@ export function SearchMenu() {
                         <CommandGroup heading="Projects">
                             {PROJECTS.map(project => {
                                 return (
-                                    <CommandItem asChild key={project.name}>
-                                        <Link to={project.href} target="_blank" rel="noopener noreferrer">
-                                            <ExternalLink />
-                                            {project.name}
-                                        </Link>
+                                    <CommandItem
+                                        key={project.name}
+                                        onSelect={() => {
+                                            window.open(project.href, "_blank", "noopener,noreferrer");
+                                        }}
+                                    >
+                                        <ExternalLink />
+                                        {project.name}
                                     </CommandItem>
                                 );
                             })}
@@ -97,11 +107,18 @@ export function SearchMenu() {
                         <CommandGroup heading="Blog">
                             {sortedPosts.map(post => {
                                 return (
-                                    <CommandItem asChild key={post.title}>
-                                        <Link to="/blog/$slug" params={{ slug: post.slug }} onClick={() => setOpen(false)}>
-                                            <ExternalLink />
-                                            {post.title}
-                                        </Link>
+                                    <CommandItem
+                                        key={post.title}
+                                        onSelect={() => {
+                                            navigate({
+                                                to: "/blog/$slug",
+                                                params: { slug: post.slug },
+                                            });
+                                            setOpen(false);
+                                        }}
+                                    >
+                                        <ExternalLink />
+                                        {post.title}
                                     </CommandItem>
                                 );
                             })}

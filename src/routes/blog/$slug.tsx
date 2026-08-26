@@ -2,7 +2,7 @@ import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { sortedPosts } from "@/data/sorted-posts.ts";
 import { Panel, PanelHeader, PanelSection } from "@/components/main-panel";
-import { Button } from "@/components/ui/button.tsx";
+import { Button, buttonVariants } from "@/components/ui/button.tsx";
 import { MDX } from "@/components/mdx.tsx";
 import img from "@/features/home/profile/cover.jpeg";
 import { format, parseISO } from "date-fns";
@@ -52,47 +52,69 @@ function PostPage() {
         <>
             <Panel>
                 <PanelSection className="flex line-after">
-                    <Button
-                        asChild
+                    {/* <Button
+                        render={<Link to="/blog" />}
                         variant="secondary"
                         size="sm"
                         aria-label="Go Back"
                     >
-                        <Link to="/blog">
-                            <ArrowLeft size={20} className="inline" /> Blog
-                        </Link>
-                    </Button>
+                        <ArrowLeft size={20} className="inline" /> Blog
+                    </Button> */}
+                    <Link
+                        to="/blog"
+                        className={buttonVariants({ variant: "secondary", size: "sm" })}
+                        aria-label="Go Back"
+                    >
+                        <ArrowLeft /> Blog
+                    </Link>
                     <div className="flex-1"></div>
                     <div className="flex gap-2">
                         {typeof prevPage === "object" && (
-                            <Button
-                                asChild
-                                variant="secondary"
-                                size="icon-sm"
-                                aria-label="Prev Page"
+                            // <Button
+                            //     render={
+                            //         <Link
+                            //             to="/blog/$slug"
+                            //             params={{ slug: prevPage.slug }}
+                            //         />
+                            //     }
+                            //     variant="secondary"
+                            //     size="icon-sm"
+                            //     aria-label="Prev Page"
+                            // >
+                            //     <ArrowLeft />
+                            // </Button>
+                            <Link
+                                to="/blog/$slug"
+                                params={{ slug: prevPage.slug }}
+                                className={buttonVariants({ variant: "secondary", size: "icon-sm" })}
+                                aria-label="Previous Page"
                             >
-                                <Link
-                                    to="/blog/$slug"
-                                    params={{ slug: prevPage.slug }}
-                                >
-                                    <ArrowLeft />
-                                </Link>
-                            </Button>
+                                <ArrowLeft />
+                            </Link>
                         )}
                         {typeof nextPage === "object" && (
-                            <Button
-                                asChild
-                                variant="secondary"
-                                size="icon-sm"
+                            // <Button
+                            //     render={
+                            //         <Link
+                            //             to="/blog/$slug"
+                            //             params={{ slug: nextPage.slug }}
+                            //         />
+                            //     }
+                            //     variant="secondary"
+                            //     size="icon-sm"
+                            //     aria-label="Next Page"
+                            // >
+                            //     <ArrowRight />
+                            // </Button>
+
+                            <Link
+                                to="/blog/$slug"
+                                params={{ slug: nextPage.slug }}
+                                className={buttonVariants({ variant: "secondary", size: "icon-sm" })}
                                 aria-label="Next Page"
                             >
-                                <Link
-                                    to="/blog/$slug"
-                                    params={{ slug: nextPage.slug }}
-                                >
-                                    <ArrowRight />
-                                </Link>
-                            </Button>
+                                <ArrowRight />
+                            </Link>
                         )}
                     </div>
                 </PanelSection>
