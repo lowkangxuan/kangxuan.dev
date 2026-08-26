@@ -17,10 +17,10 @@ export function TimelineHeader({title, meta, logo, from, to}: {title: string, me
                     <TimelineDuration from={from} to={to} />
                 </div>
             </div>
-            <span className="group-data-[state=open]:hidden">
+            <span className="group-data-panel-open:hidden">
                 <ChevronDown size={16} />
             </span>
-            <span className="group-data-[state=closed]:hidden">
+            <span className="hidden group-data-panel-open:inline">
                 <ChevronUp size={16} />
             </span>
         </div>
