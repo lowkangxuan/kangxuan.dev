@@ -67,14 +67,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                     <TooltipProvider>
                         <div
                             className="
-    pointer-events-none fixed inset-x-0 bottom-0 z-[500]
-    h-24
-    bg-gradient-to-t from-background via-background/50 to-transparent
-    backdrop-blur-[2px]
-    [mask-image:linear-gradient(to_top,black_0%,black_35%,transparent_100%)]
-    [-webkit-mask-image:linear-gradient(to_top,black_0%,black_35%,transparent_100%)]
-    max-lg:hidden
-  "
+                                pointer-events-none fixed inset-x-0 bottom-0 z-[500]
+                                h-28 max-lg:hidden
+                                bg-linear-to-t from-background from-0% via-background/70 via-40% to-background/0
+                            "
                         />
                         <SiteNav />
                         <main className="max-w-dvw px-2 overflow-hidden">
