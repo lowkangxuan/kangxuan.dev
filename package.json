@@ -22,7 +22,7 @@
         "@prose-ui/style": "^2.0.7",
         "@tailwindcss/typography": "^0.5.19",
         "@tailwindcss/vite": "^4.0.6",
-        "@tanstack/react-devtools": "^0.7.11",
+        "@tanstack/react-devtools": "^0.10.12",
         "@tanstack/react-router": "^1.132.0",
         "@tanstack/react-router-devtools": "^1.132.0",
         "@tanstack/react-router-ssr-query": "^1.131.7",
@@ -69,7 +69,7 @@
         "zod": "^4.3.5"
     },
     "devDependencies": {
-        "@tanstack/devtools-vite": "^0.3.11",
+        "@tanstack/devtools-vite": "^0.8.5",
         "@tanstack/eslint-config": "^0.3.0",
         "@testing-library/dom": "^10.4.0",
         "@testing-library/react": "^16.2.0",
