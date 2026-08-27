@@ -1,25 +1,24 @@
 import { Check, Copy } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 import { Button } from "@/components/ui/button.tsx";
+import { cn } from "@/lib/utils.ts";
 
-export function CodeBlock({ props }: { props: any }) {
+export function CodeBlock({
+    className,
+    children,
+    ...props
+}: ComponentPropsWithoutRef<"pre">) {
     const [isCopied, setIsCopied] = useState<boolean>(false);
     const containerRef = useRef<HTMLDivElement | null>(null);
 
-    const { highlightedCode, highlightedcode, className, ...rest } = props;
-    const html = highlightedCode ?? highlightedcode;
-
     useEffect(() => {
         if (!isCopied) return;
-        console.log("Copied");
         const timeoutId = setTimeout(() => {
-            setIsCopied(false)
+            setIsCopied(false);
         }, 1500);
 
-        return () => {
-            clearTimeout(timeoutId);
-        }
-
+        return () => clearTimeout(timeoutId);
     }, [isCopied]);
 
     const handleCopy = async () => {
@@ -34,56 +33,39 @@ export function CodeBlock({ props }: { props: any }) {
                 root;
             const domText = codeEl?.textContent ?? "";
 
-            let textToCopy = domText;
-            if (!textToCopy && typeof html === "string") {
-                const temp = document.createElement("div");
-                temp.innerHTML = html;
-                textToCopy = temp.textContent || temp.innerText || "";
-            }
+            if (!domText) return;
 
-            if (!textToCopy) return;
-
-            await navigator.clipboard.writeText(textToCopy);
+            await navigator.clipboard.writeText(domText);
             setIsCopied(true);
         } catch (err) {
             console.error("Failed to copy:", err);
         }
     };
 
-    if (typeof html === "string" && html.length > 0) {
-        return (
-            <div ref={containerRef} className="relative">
-                <div
-                    className={"overflow-x-auto rounded-lg p-4 " + (className ?? "")}
-                    dangerouslySetInnerHTML={{ __html: html }}
-                />
-                <Button
-                    variant="secondary"
-                    size="icon-xs"
-                    onClick={handleCopy}
-                    className="absolute top-2 right-2 p-3.5"
-                >
-                    {isCopied ? <Check /> : <Copy />}
-                </Button>
-            </div>
-        );
-    }
-
     return (
         <div ref={containerRef} className="relative">
             <pre
-                {...rest}
-                className={"shiki overflow-x-auto rounded-lg p-4 text-sm " + (className ?? "")}
+                {...props}
+                className={cn(
+                    "shiki overflow-x-auto rounded-lg p-4 text-sm",
+                    className,
+                )}
             >
-                {rest.children}
+                {children}
             </pre>
             <Button
                 variant="secondary"
                 size="icon-xs"
                 onClick={handleCopy}
                 className="absolute top-2 right-2 p-3.5"
+                aria-label={isCopied ? "Code copied" : "Copy code"}
+                title={isCopied ? "Copied" : "Copy code"}
             >
-                {isCopied ? <Check /> : <Copy />}
+                {isCopied ? (
+                    <Check aria-hidden="true" />
+                ) : (
+                    <Copy aria-hidden="true" />
+                )}
             </Button>
         </div>
     );
