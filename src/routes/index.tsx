@@ -8,7 +8,6 @@ import { GithubActivity } from "@/features/home/github-activity.tsx";
 import { BlogSection } from "@/features/home/blog-section.tsx";
 import { Skills } from "@/features/home/skills";
 import { ProjectsSection } from "@/features/home/projects-section.tsx";
-import { PanelSeparator } from "@/components/main-panel/panel-separator.tsx";
 
 type Activity = {
     date: string
@@ -29,7 +28,7 @@ const ActivitySchema = z.object({
     year: z.union([z.number(), z.literal('last')]),
 })
 
-const getGithubActivity = createServerFn()
+const getGithubActivity = createServerFn({ method: "GET" })
     .inputValidator(ActivitySchema)
     .handler(async ({ data }) => {
         const apiUrl = 'https://github-contributions-api.jogruber.de/v4/';
@@ -44,16 +43,16 @@ const getGithubActivity = createServerFn()
     })
 
 export const Route = createFileRoute("/")({
-    loader: async() => {
+    loader: async () => {
         return {
-            contributions: await getGithubActivity({ data: { username: 'lowkangxuan', year: 'last'} })
+            contributions: await getGithubActivity({ data: { username: 'lowkangxuan', year: 'last' } })
         }
     },
     component: App,
 });
 
 function App() {
-    const {contributions} = Route.useLoaderData();
+    const { contributions } = Route.useLoaderData();
 
     return (
         <div>
