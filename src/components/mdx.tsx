@@ -35,6 +35,20 @@ const components = {
         <strong className={cn("text-primary", className)} {...props} />
     ),
     pre: (props: ComponentPropsWithoutRef<"pre">) => <CodeBlock {...props} />,
+    code: ({ className, ...props }: ComponentPropsWithoutRef<"code">) => {
+        const isCodeBlock = "data-language" in props;
+
+        return (
+            <code
+                className={cn(
+                    !isCodeBlock &&
+                        "rounded-md bg-muted px-1.5 py-0.5 font-mono text-[0.875em] font-medium text-foreground ring-1 ring-border",
+                    className,
+                )}
+                {...props}
+            />
+        );
+    },
     a: ({ className, ...props }: ComponentPropsWithoutRef<"a">) => (
         <a className={cn("font-semibold underline", className)} {...props} />
     ),
@@ -50,7 +64,16 @@ const components = {
     ul: ({ className, ...props }: ComponentPropsWithoutRef<"ul">) => (
         <ul
             className={cn(
-                "font-geist pl-6 text-neutral-600 dark:text-neutral-400",
+                "font-geist my-5 list-disc pl-6 text-neutral-600 dark:text-neutral-400",
+                className,
+            )}
+            {...props}
+        />
+    ),
+    ol: ({ className, ...props }: ComponentPropsWithoutRef<"ol">) => (
+        <ol
+            className={cn(
+                "font-geist my-5 list-decimal pl-6 text-neutral-600 marker:font-medium marker:text-muted-foreground dark:text-neutral-400",
                 className,
             )}
             {...props}
@@ -59,7 +82,7 @@ const components = {
     li: ({ className, ...props }: ComponentPropsWithoutRef<"li">) => (
         <li
             className={cn(
-                "my-1 list-disc pt-1 text-neutral-600 marker:text-xs marker:text-muted-foreground dark:text-neutral-400",
+                "my-1 pt-1 pl-1 text-neutral-600 marker:text-sm marker:text-muted-foreground dark:text-neutral-400",
                 className,
             )}
             {...props}
