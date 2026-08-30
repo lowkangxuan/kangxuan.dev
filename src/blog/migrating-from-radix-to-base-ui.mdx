@@ -1,0 +1,146 @@
+---
+pinned: false
+title: "Migrating My Portfolio from Radix UI to Base UI"
+published: 2026-08-31
+description: What I learned from migrating my shadcn/ui components to Base UI with the help of the shadcn skill.
+tags: ["shadcn", "base-ui", "react"]
+---
+
+## Introduction
+
+When I first rebuilt this portfolio, my shadcn/ui components used Radix UI as their underlying primitive library. It worked well, but after [shadcn/ui made Base UI the default for new projects](https://ui.shadcn.com/docs/changelog/2026-07-base-ui-default), I became curious about what it would take to move an existing and already-customized site over.
+
+This was not a brand-new project where I could simply choose Base UI during setup. I already had components built on top of Radix, custom styles, animations, and several places where I had composed TanStack Router's `Link` with shadcn's `Button`.
+
+Thankfully, shadcn provides an [official skill](https://ui.shadcn.com/docs/skills) that gives coding agents the context needed to work with shadcn/ui and migrate between its supported primitive libraries. I used it to handle the first pass of the migration, then reviewed and fixed the remaining issues manually.
+
+The whole process—from running the skill to refactoring components and testing the site—took me around **two to three hours**.
+
+## My First Attempt
+
+This was actually my second attempt at the migration.
+
+A few months earlier, I created a separate `feature/baseui` branch and tried to migrate the site manually. I started by updating the button component and global styles, then created a custom `LinkButton` to deal with the differences between Radix's `asChild` pattern and Base UI's composition API. I also began refactoring the navigation controls on my blog pages.
+
+That initial progress quickly showed me how large the migration would be. Every primitive needed to be checked, every API difference had to be understood, and every customized component had to be updated without losing its existing design. Meanwhile, the main branch was still changing, which made keeping the migration branch up to date another task of its own.
+
+Eventually, I gave up on that attempt because the process was a little too cumbersome to complete manually. The unfinished branch remained in the repository as a reminder of where I had stopped, while the live site continued using Radix UI.
+
+When shadcn later released a dedicated migration skill, it gave me a reason to revisit the idea. I was glad that the difficult and repetitive parts of the process had been turned into reusable instructions for a coding agent. Instead of researching and converting every component from scratch, I could let the skill handle most of the groundwork and spend my time reviewing the result.
+
+## Starting the Migration
+
+I first installed the shadcn skill with:
+
+```bash
+npx skills add shadcn/ui
+```
+
+From there, I asked my coding agent to migrate the project from Radix UI to Base UI. The skill handled most of the repetitive work: replacing primitive imports, updating component implementations, installing `@base-ui/react`, removing the direct Radix dependencies, and changing the shadcn style in `components.json` from `new-york` to `base-nova`.
+
+That gave me a strong starting point, but it was not the end of the migration. Since shadcn components live inside the project and are meant to be customized, the agent still had to make decisions around code that no longer matched the generated versions. A few of those decisions needed a human pass.
+
+## Challenge 1: Links Styled as Buttons
+
+One of the first problems came from components that used Radix's `asChild` pattern. I had navigation links written like this:
+
+```tsx
+<Button asChild variant="secondary" size="sm">
+    <Link to="/blog">
+        <ArrowLeft /> Blog
+    </Link>
+</Button>
+```
+
+With Radix's `Slot`, `asChild` allowed the `Link` to become the element rendered by `Button`. Base UI uses a different composition API, so this pattern no longer worked after the migration.
+
+For these navigation controls, I did not need button behaviour—the element was still semantically a link. The simplest fix was to render the `Link` directly and apply the button variant classes to it:
+
+```tsx
+<Link
+    to="/blog"
+    className={buttonVariants({
+        variant: "secondary",
+        size: "sm",
+    })}
+>
+    <ArrowLeft /> Blog
+</Link>
+```
+
+This preserved the same appearance without wrapping one interactive element inside another. I applied the same approach to the previous and next post links.
+
+It was a small refactor, but it was also a useful reminder that visual design and HTML semantics do not have to be tied to the same component. A link can look like a button while remaining a link.
+
+## Challenge 2: Restyling the Command Menu
+
+The command menu was the most visible regression. During the switch, the command component was regenerated, which wiped out the custom styling I had added to the site's search menu.
+
+The component still worked, but it no longer looked like the rest of the site. I had previously customized details such as:
+
+- The input container and border
+- The minimum height of the command dialog
+- Spacing between command groups
+- The keyboard navigation hints below the search input
+- The appearance of active and selected command items
+
+I had to compare the new Base UI-compatible component with the previous version and manually bring those styles back. I also changed command menu navigation away from `asChild`. Internal items now call TanStack Router's `navigate` function through `onSelect`, while external project links open with `window.open`.
+
+This was the point where having the migration in Git helped the most. The newly generated component was not necessarily wrong; it simply could not know which parts of my old file were intentional customizations. Looking at the diff made it much easier to separate required API changes from styling I wanted to preserve.
+
+## Challenge 3: Different State Attributes
+
+Another issue appeared in the collapsible timeline sections on the homepage. My animations and chevron icons depended on the state attributes emitted by Radix UI.
+
+The Radix version used selectors such as:
+
+```tsx
+data-[state=closed]:animate-collapsible-up
+data-[state=open]:animate-collapsible-down
+```
+
+Base UI exposes its state differently. The collapsible content is implemented as a `Panel`, with open and closed states available through attributes such as `data-open`, `data-closed`, and `data-panel-open` depending on the element.
+
+That meant the Tailwind selectors also had to change:
+
+```tsx
+data-closed:animate-collapsible-up
+data-open:animate-collapsible-down
+```
+
+The chevron icons in my timeline header needed a similar update:
+
+```tsx
+<span className="group-data-panel-open:hidden">
+    <ChevronDown />
+</span>
+<span className="hidden group-data-panel-open:inline">
+    <ChevronUp />
+</span>
+```
+
+The component rendered without an obvious TypeScript error before this fix, but its animations and visual state were incorrect. This made it a good example of why a successful build is only one part of validating a UI migration. Behaviour and state-driven styling still need to be checked in the browser.
+
+## What the Skill Did Well
+
+The shadcn skill saved me from doing the entire migration by hand. It understood the project configuration, updated most of the primitive-level APIs, and reduced a potentially tedious rewrite into a manageable review and refactor.
+
+More importantly, it gave me a working direction. Instead of reading the documentation for every component before touching the code, I could focus on the places where my own customizations made the migration less mechanical.
+
+At the same time, the skill was an accelerator rather than a one-click solution. It could update the common patterns, but it could not perfectly preserve every styling choice or decide the best semantic element for every use case. Those parts still required me to understand the code, inspect the diff, and test each interaction.
+
+## What I Learned
+
+My biggest takeaway is that swapping a primitive library is not only an import change. Even when two libraries provide similar components, their composition patterns, state attributes, and internal structure can be different enough to affect the code built around them.
+
+If I were doing a similar migration again, I would pay close attention to three things from the start:
+
+1. Search for library-specific APIs such as `asChild` and `data-[state=...]` before migrating.
+2. Keep a list of heavily customized shadcn components so regenerated files can be reviewed carefully.
+3. Test interactions and animations, not just whether the project builds successfully.
+
+## Final Thoughts
+
+Overall, the second attempt was much smoother than the first. Spending two to three hours was reasonable for updating the component foundation of the entire site, especially since most of that time went into reviewing, restoring custom styles, and fixing small behavioural differences. Compared with the manual approach I had abandoned a few months earlier, the skill made the migration significantly easier and faster.
+
+I am glad I used the shadcn skill for the repetitive parts, but I am equally glad I did not treat its output as finished code. The experience reinforced something I keep learning with AI-assisted development: the tool can get you surprisingly far, but knowing your own codebase is what gets the work across the finish line.
