@@ -2,7 +2,6 @@ import { sortedPosts } from "@/data/sorted-posts.ts";
 import { GridList } from "@/components/grid-item-list/grid-list.tsx";
 import { GridItem } from "@/components/grid-item-list/grid-item.tsx";
 import { Link } from "@tanstack/react-router";
-import { slug } from "github-slugger";
 import { MoveRight } from "lucide-react";
 import { format, parseISO } from "date-fns";
 
@@ -32,7 +31,12 @@ export function BlogList({ query }: { query?: string | undefined }) {
                             className="flex gap-2 border-b p-4 transition-[background-color] hover:bg-muted"
                         >
                             <div className="gap-2 flex-1">
-                                <h2 className="font-bold text-lg text-primary leading-tight mb-1">
+                                <h2
+                                    className="font-bold text-lg text-primary leading-tight mb-1"
+                                    style={{
+                                        viewTransitionName: `post-${post.slug}`,
+                                    }}
+                                >
                                     {post.title}
                                 </h2>
                                 <div className="text-muted-foreground text-xs mb-1">

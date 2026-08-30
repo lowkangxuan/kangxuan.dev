@@ -52,14 +52,6 @@ function PostPage() {
         <>
             <Panel>
                 <PanelSection className="flex line-after">
-                    {/* <Button
-                        render={<Link to="/blog" />}
-                        variant="secondary"
-                        size="sm"
-                        aria-label="Go Back"
-                    >
-                        <ArrowLeft size={20} className="inline" /> Blog
-                    </Button> */}
                     <Link
                         to="/blog"
                         className={buttonVariants({ variant: "secondary", size: "sm" })}
@@ -70,19 +62,6 @@ function PostPage() {
                     <div className="flex-1"></div>
                     <div className="flex gap-2">
                         {typeof prevPage === "object" && (
-                            // <Button
-                            //     render={
-                            //         <Link
-                            //             to="/blog/$slug"
-                            //             params={{ slug: prevPage.slug }}
-                            //         />
-                            //     }
-                            //     variant="secondary"
-                            //     size="icon-sm"
-                            //     aria-label="Prev Page"
-                            // >
-                            //     <ArrowLeft />
-                            // </Button>
                             <Link
                                 to="/blog/$slug"
                                 params={{ slug: prevPage.slug }}
@@ -93,20 +72,6 @@ function PostPage() {
                             </Link>
                         )}
                         {typeof nextPage === "object" && (
-                            // <Button
-                            //     render={
-                            //         <Link
-                            //             to="/blog/$slug"
-                            //             params={{ slug: nextPage.slug }}
-                            //         />
-                            //     }
-                            //     variant="secondary"
-                            //     size="icon-sm"
-                            //     aria-label="Next Page"
-                            // >
-                            //     <ArrowRight />
-                            // </Button>
-
                             <Link
                                 to="/blog/$slug"
                                 params={{ slug: nextPage.slug }}
@@ -131,7 +96,12 @@ function PostPage() {
                         )}
 
                         <header>
-                            <h1 className="text-2xl font-semibold mb-2">
+                            <h1
+                                className="text-2xl font-semibold mb-2"
+                                style={{
+                                    viewTransitionName: `post-${page.slug}`,
+                                }}
+                            >
                                 {page.title}
                             </h1>
                             <div className="mb-2 text-sm text-muted-foreground">
