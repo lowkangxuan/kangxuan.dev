@@ -6,7 +6,7 @@ import { Education } from "@/features/home/education";
 import { Profile } from "@/features/home/profile";
 import { GithubActivity } from "@/features/home/github-activity.tsx";
 import { BlogSection } from "@/features/home/blog-section.tsx";
-import { Skills } from "@/features/home/skills";
+import { Skills } from "@/features/home/stack";
 import { ProjectsSection } from "@/features/home/projects-section.tsx";
 
 type Activity = {

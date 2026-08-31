@@ -37,10 +37,6 @@ export const STACK_DATA: Array<stackData> = [
         name: "Tanstack",
     },
     {
-        key: "11ty",
-        name: "11ty",
-    },
-    {
         key: "git",
         name: "Git",
     },
