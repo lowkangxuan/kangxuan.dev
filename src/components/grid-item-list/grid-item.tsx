@@ -1,41 +1,37 @@
 import { Link } from "@tanstack/react-router";
 
 type LinkProps =
-  | {
-      to: string
-      params?: never
-      newTab?: boolean
+    | {
+        to: string
+        params?: never
+        newTab?: boolean
     }
-  | {
-      to: string
-      params: Record<string, string>
-      newTab?: boolean
+    | {
+        to: string
+        params: Record<string, string>
+        newTab?: boolean
     }
 
 interface GridItemProps {
     title: string,
     description?: string,
     thumbnailUrl?: string,
-    date?: string,
     link: LinkProps
 }
 
-export function GridItem({ title, description, thumbnailUrl, date, link } : GridItemProps) {
+export function GridItem({ title, description, thumbnailUrl, link }: GridItemProps) {
     return (
         <div className="p-3 border-b">
             <Link
                 to={link.to}
                 {...("params" in link ? { params: link.params } : {})}
                 {...(link.newTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="flex flex-col group h-full gap-2 p-2 bg-background dark:bg-background/65 rounded-xl border border-muted-foreground/30"
+                className="grid grid-cols-[2fr_3fr] h-full gap-2 p-2 bg-background dark:bg-background/65 rounded-xl border border-muted-foreground/30"
             >
-                <div className="flex flex-col gap-2 px-2 py-1 text-xs text-muted-foreground">
-                    <div className="flex flex-col gap-1 justify-between">
-                        <h2 className="font-bold text-base text-primary max-w-52 leading-tight">
-                            {title}
-                        </h2>
-                        {date && <span>{date}</span>}
-                    </div>
+                <div className="flex flex-col gap-1 justify-between">
+                    <h2 className="font-bold text-base text-primary max-w-52 leading-tight">
+                        {title}
+                    </h2>
                 </div>
                 <div className="rounded-lg overflow-hidden border bg-muted aspect-video">
                     {thumbnailUrl ? (
