@@ -9,13 +9,14 @@ export function Skills() {
     return (
         <Panel>
             <PanelHeader>Stack</PanelHeader>
-            <PanelSection className="p-0">
+            <PanelSection className="relative p-0 [--col-left:--spacing(48)]">
+                <div className="absolute w-px h-full bg-border left-(--col-left) max-sm:hidden"></div>
                 {TECH_STACK_CATEGORIES.map((category, index) => (
-                    <div key={category.key} className="grid grid-cols-[1fr_3fr] not-last:border-b">
-                        <span className="text-sm font-medium p-4 content-center border-r">
+                    <div key={category.key} className="flex flex-col sm:grid sm:grid-cols-[var(--col-left)_1fr] gap-3 sm:gap-0 py-4 not-last:border-b">
+                        <span className="text-sm font-medium px-4 content-center">
                             <span className="text-muted-foreground/60">0{index+1} // </span>{category.label}
                         </span>
-                        <div className="flex flex-wrap gap-2 p-4">
+                        <div className="flex flex-wrap gap-2 px-4">
                             {TECH_STACK.filter((stack) => stack.category === category.key).map(
                                 (stack) => (
                                     <Link
@@ -23,7 +24,7 @@ export function Skills() {
                                         to={stack.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="flex h-6 items-center gap-1.25 rounded-sm text-primary border border-muted-foreground/30 bg-muted px-2 text-xs text-muted-foreground [&>svg]:size-3.5"
+                                        className="flex h-6 items-center gap-1.25 rounded-sm border border-muted-foreground/30 bg-muted px-2 text-xs [&>svg]:size-3.5"
                                     >
                                         {theme === "light"
                                             ? stack.icon
