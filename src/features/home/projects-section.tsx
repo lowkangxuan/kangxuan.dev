@@ -1,6 +1,5 @@
 import { Panel, PanelHeader } from "@/components/main-panel";
 import { PROJECTS } from "@/data/projects.ts";
-import { GridList } from "@/components/grid-item-list/grid-list.tsx";
 import { GridItem } from "@/components/grid-item-list/grid-item.tsx";
 
 export function ProjectsSection() {
@@ -13,13 +12,15 @@ export function ProjectsSection() {
             </Panel>
             <div className="line-after relative border-x">
                 <div className="flex flex-col">
-                    {PROJECTS.slice(0, 4).map((project) => {
+                    {PROJECTS.slice(0, 4).map((project, index) => {
                         return (
                             <GridItem key={project.name}
+                                index={index}
                                 title={project.name}
                                 description={project.description}
                                 thumbnailUrl={project.thumbnail}
-                                link={{ to: project.href, newTab: true }}
+                                href={project.href}
+                                repo={project.repo}
                             />
                         );
                     })}
