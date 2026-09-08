@@ -28,7 +28,7 @@ interface GridItemProps {
 function ImageContainer({ href, children }: { href: string, children: React.ReactNode }) {
     return (
         <div className="flex w-full min-w-0 flex-col self-start rounded-lg overflow-hidden border aspect-16/10">
-            <div className="grid grid-cols-[1fr_auto_1fr] bg-muted items-center shrink-0 p-2 px-3">
+            <div className="grid grid-cols-[1fr_auto_1fr] bg-muted border-b items-center shrink-0 p-2 px-3">
                 <div className="flex justify-self-start gap-1.5 items-center">
                     <span className="size-2 rounded-full bg-red-400"></span>
                     <span className="size-2 rounded-full bg-yellow-400"></span>
