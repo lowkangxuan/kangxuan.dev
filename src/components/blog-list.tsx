@@ -32,7 +32,7 @@ export function BlogList({ query }: { query?: string | undefined }) {
                         >
                             <div className="gap-2 flex-1">
                                 <h2
-                                    className="font-bold text-lg text-primary leading-tight mb-1"
+                                    className="font-bold text-lg text-foreground leading-tight mb-1"
                                     style={{
                                         viewTransitionName: `post-${post.slug}`,
                                     }}

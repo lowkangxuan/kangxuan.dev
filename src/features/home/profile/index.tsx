@@ -16,7 +16,7 @@ export function Profile() {
                         className="md:size-38 size-24 bg-background rounded-2xl ring ring-offset-4 ring-border ring-offset-background"
                     />
                     <div className="flex flex-col self-end gap-1 text-muted-foreground text-sm">
-                        <h1 className="font-bold text-2xl sm:text-3xl tracking-tight text-primary">
+                        <h1 className="font-bold text-2xl sm:text-3xl tracking-tight text-foreground">
                             Low Kang Xuan
                         </h1>
                         <div className="gap-2 hidden sm:flex">

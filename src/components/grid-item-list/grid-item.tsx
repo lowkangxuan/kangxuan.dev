@@ -51,7 +51,7 @@ export function GridItem({ index, title, description, thumbnailUrl, href, repo }
             <div className="flex min-w-0 flex-col gap-4 sm:group-even/grid-item:order-last">
                 <span className="text-xs text-muted-foreground">[PROJECT // 0{index+1}]</span>
                 <div className="flex-1">
-                    <h2 className="font-semibold text-lg text-primary max-w-52 leading-tight mb-2">
+                    <h2 className="font-semibold text-lg text-foreground max-w-52 leading-tight mb-2">
                         {title}
                     </h2>
                     <p className="text-md text-muted-foreground font-geist">{description}</p>

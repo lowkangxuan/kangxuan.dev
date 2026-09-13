@@ -32,7 +32,7 @@ const components = {
         />
     ),
     strong: ({ className, ...props }: ComponentPropsWithoutRef<"strong">) => (
-        <strong className={cn("text-primary", className)} {...props} />
+        <strong className={cn("text-foreground", className)} {...props} />
     ),
     pre: (props: ComponentPropsWithoutRef<"pre">) => <CodeBlock {...props} />,
     code: ({ className, ...props }: ComponentPropsWithoutRef<"code">) => {
