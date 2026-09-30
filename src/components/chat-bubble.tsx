@@ -5,9 +5,17 @@ import remarkGfm from "remark-gfm";
 import type { Components } from "react-markdown";
 import { Button } from "@/components/ui/button.tsx";
 import { Textarea } from "@/components/ui/textarea.tsx";
-import { Message, MessageContent, MessageGroup } from "@/components/ui/message.tsx";
+import { Message, MessageContent } from "@/components/ui/message.tsx";
 import { Bubble, BubbleContent } from "@/components/ui/bubble.tsx";
 import { Marker, MarkerContent } from "@/components/ui/marker.tsx";
+import {
+    MessageScroller,
+    MessageScrollerButton,
+    MessageScrollerContent,
+    MessageScrollerItem,
+    MessageScrollerProvider,
+    MessageScrollerViewport,
+} from "@/components/ui/message-scroller.tsx";
 import { streamResponse } from "@/server/chat"
 
 type ChatMessage = {
@@ -61,24 +69,17 @@ export function ChatBubble() {
     const [messages, setMessages] = useState<Array<ChatMessage>>([GREETING]);
     const [input, setInput] = useState<string>("");
     const [pending, setPending] = useState<boolean>(false);
-    // waiting on the first chunk of a reply
     const thinking = pending && messages.at(-1)?.role === "user";
 
     const bubbleRef = useRef<HTMLButtonElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
-    const listRef = useRef<HTMLDivElement>(null);
     const wasOpen = useRef<boolean>(false);
 
     useEffect(() => {
         if (open) inputRef.current?.focus();
-        // return focus to the bubble after closing, but not on first mount
         else if (wasOpen.current) bubbleRef.current?.focus();
         wasOpen.current = open;
     }, [open]);
-
-    useEffect(() => {
-        listRef.current?.scrollTo({ top: listRef.current.scrollHeight });
-    }, [messages, pending]);
 
     async function send() {
         const content = input.trim();
@@ -153,45 +154,59 @@ export function ChatBubble() {
                         </Button>
                     </div>
 
-                    <div ref={listRef} className="flex-1 overflow-y-auto p-4" aria-live="polite">
-                        <MessageGroup>
-                            {messages.map((message) => {
-                                const align = message.role === "user" ? "end" : "start";
-                                return (
-                                    <Message key={message.id} align={align}>
-                                        <MessageContent>
-                                            <Bubble
-                                                align={align}
-                                                variant={message.role === "user" ? "default" : message.error ? "destructive" : "muted"}
+                    <MessageScrollerProvider autoScroll>
+                        <MessageScroller className="flex-1">
+                            <MessageScrollerViewport aria-label="Chat messages">
+                                <MessageScrollerContent className="gap-2 p-4">
+                                    {messages.map((message) => {
+                                        const align = message.role === "user" ? "end" : "start";
+                                        return (
+                                            <MessageScrollerItem
+                                                key={message.id}
+                                                messageId={message.id}
+                                                scrollAnchor={message.role === "user"}
+                                                className="content-visibility:visible"
                                             >
-                                                {message.role === "user" ? (
-                                                    <BubbleContent className="whitespace-pre-wrap">
-                                                        {message.content}
-                                                    </BubbleContent>
-                                                ) : (
-                                                    <BubbleContent className={MARKDOWN_CLASSES}>
-                                                        <Markdown
-                                                            remarkPlugins={[remarkGfm]}
-                                                            components={markdownComponents}
+                                                <Message align={align}>
+                                                    <MessageContent>
+                                                        <Bubble
+                                                            align={align}
+                                                            variant={message.role === "user" ? "default" : message.error ? "destructive" : "muted"}
                                                         >
-                                                            {message.content}
-                                                        </Markdown>
-                                                    </BubbleContent>
-                                                )}
-                                            </Bubble>
-                                        </MessageContent>
-                                    </Message>
-                                );
-                            })}
-                            {thinking && (
-                                <Marker role="status" className="justify-center">
-                                    <MarkerContent className="shimmer">
-                                        Thinking…
-                                    </MarkerContent>
-                                </Marker>
-                            )}
-                        </MessageGroup>
-                    </div>
+                                                            {message.role === "user" ? (
+                                                                <BubbleContent className="whitespace-pre-wrap">
+                                                                    {message.content}
+                                                                </BubbleContent>
+                                                            ) : (
+                                                                <BubbleContent className={MARKDOWN_CLASSES}>
+                                                                    <Markdown
+                                                                        remarkPlugins={[remarkGfm]}
+                                                                        components={markdownComponents}
+                                                                    >
+                                                                        {message.content}
+                                                                    </Markdown>
+                                                                </BubbleContent>
+                                                            )}
+                                                        </Bubble>
+                                                    </MessageContent>
+                                                </Message>
+                                            </MessageScrollerItem>
+                                        );
+                                    })}
+                                    {thinking && (
+                                        <MessageScrollerItem className="content-visibility:visible">
+                                            <Marker role="status" className="justify-center">
+                                                <MarkerContent className="shimmer">
+                                                    Thinking…
+                                                </MarkerContent>
+                                            </Marker>
+                                        </MessageScrollerItem>
+                                    )}
+                                </MessageScrollerContent>
+                            </MessageScrollerViewport>
+                            <MessageScrollerButton />
+                        </MessageScroller>
+                    </MessageScrollerProvider>
 
                     <form
                         className="flex items-end gap-2 border-t p-2"
