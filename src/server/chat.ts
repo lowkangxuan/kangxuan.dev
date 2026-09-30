@@ -13,11 +13,11 @@ export const streamResponse = createServerFn({ method: "POST" })
         const key = process.env.KAI_API_KEY
 
         if (!url) {
-            throw Error("")
+            throw Error("KAI url is missing from the environment variable!")
         }
 
         if (!key) {
-            throw Error("")
+            throw Error("KAI api key is missing from the environment variable!")
         }
 
         const result = await fetch(`${url}/query`, {
