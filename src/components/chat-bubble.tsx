@@ -2,28 +2,29 @@ import { useEffect, useRef, useState } from "react";
 import { MessageCircle, SendHorizontal, X } from "lucide-react";
 import { Button } from "@/components/ui/button.tsx";
 import { Textarea } from "@/components/ui/textarea.tsx";
-import { cn } from "@/lib/utils.ts";
+import { Message, MessageContent, MessageGroup } from "@/components/ui/message.tsx";
+import { Bubble, BubbleContent } from "@/components/ui/bubble.tsx";
 
-type Message = {
+type ChatMessage = {
     id: string;
     role: "user" | "assistant";
     content: string;
 };
 
-const GREETING: Message = {
+const GREETING: ChatMessage = {
     id: "greeting",
     role: "assistant",
     content: "Hey there! Ask me anything.",
 };
 
-async function getReply(_messages: Array<Message>): Promise<string> {
+async function getReply(_messages: Array<ChatMessage>): Promise<string> {
     await new Promise((resolve) => setTimeout(resolve, 600));
     return "Thanks for the message! Chat isn't hooked up yet.";
 }
 
 export function ChatBubble() {
     const [open, setOpen] = useState<boolean>(false);
-    const [messages, setMessages] = useState<Array<Message>>([GREETING]);
+    const [messages, setMessages] = useState<Array<ChatMessage>>([GREETING]);
     const [input, setInput] = useState<string>("");
     const [pending, setPending] = useState<boolean>(false);
 
@@ -49,7 +50,7 @@ export function ChatBubble() {
 
         const next = [
             ...messages,
-            { id: crypto.randomUUID(), role: "user", content } satisfies Message,
+            { id: crypto.randomUUID(), role: "user", content } satisfies ChatMessage,
         ];
         setMessages(next);
         setInput("");
@@ -102,25 +103,37 @@ export function ChatBubble() {
                         </Button>
                     </div>
 
-                    <div ref={listRef} className="flex-1 overflow-y-auto p-4 space-y-2" aria-live="polite">
-                        {messages.map((message) => (
-                            <div
-                                key={message.id}
-                                className={cn(
-                                    "w-fit max-w-[85%] rounded-2xl px-3 py-2 text-sm whitespace-pre-wrap break-words",
-                                    message.role === "user"
-                                        ? "ml-auto bg-primary text-primary-foreground rounded-br-sm"
-                                        : "bg-muted rounded-bl-sm",
-                                )}
-                            >
-                                {message.content}
-                            </div>
-                        ))}
-                        {pending && (
-                            <div className="w-fit rounded-2xl rounded-bl-sm bg-muted px-3 py-2 text-sm text-muted-foreground">
-                                Typing…
-                            </div>
-                        )}
+                    <div ref={listRef} className="flex-1 overflow-y-auto p-4" aria-live="polite">
+                        <MessageGroup>
+                            {messages.map((message) => {
+                                const align = message.role === "user" ? "end" : "start";
+                                return (
+                                    <Message key={message.id} align={align}>
+                                        <MessageContent>
+                                            <Bubble
+                                                align={align}
+                                                variant={message.role === "user" ? "default" : "muted"}
+                                            >
+                                                <BubbleContent className="whitespace-pre-wrap">
+                                                    {message.content}
+                                                </BubbleContent>
+                                            </Bubble>
+                                        </MessageContent>
+                                    </Message>
+                                );
+                            })}
+                            {pending && (
+                                <Message>
+                                    <MessageContent>
+                                        <Bubble variant="muted">
+                                            <BubbleContent className="text-muted-foreground">
+                                                Typing…
+                                            </BubbleContent>
+                                        </Bubble>
+                                    </MessageContent>
+                                </Message>
+                            )}
+                        </MessageGroup>
                     </div>
 
                     <form
