@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button.tsx";
 import { Textarea } from "@/components/ui/textarea.tsx";
 import { Message, MessageContent, MessageGroup } from "@/components/ui/message.tsx";
 import { Bubble, BubbleContent } from "@/components/ui/bubble.tsx";
+import { Marker, MarkerContent } from "@/components/ui/marker.tsx";
 import { streamResponse } from "@/server/chat"
 
 type ChatMessage = {
@@ -125,15 +126,11 @@ export function ChatBubble() {
                                 );
                             })}
                             {pending && (
-                                <Message>
-                                    <MessageContent>
-                                        <Bubble variant="muted">
-                                            <BubbleContent className="text-muted-foreground">
-                                                Typing…
-                                            </BubbleContent>
-                                        </Bubble>
-                                    </MessageContent>
-                                </Message>
+                                <Marker role="status" className="justify-center">
+                                    <MarkerContent className="shimmer">
+                                        Thinking…
+                                    </MarkerContent>
+                                </Marker>
                             )}
                         </MessageGroup>
                     </div>
