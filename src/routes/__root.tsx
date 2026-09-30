@@ -11,6 +11,7 @@ import { SiteFooter } from "@/components/site-footer.tsx";
 import { TooltipProvider } from "@/components/ui/tooltip.tsx";
 import { DitheredBackground } from "@/components/dithered-background.tsx";
 import { SiteNav } from "@/components/site-nav.tsx";
+import { ChatBubble } from "@/components/chat-bubble.tsx";
 
 export const Route = createRootRoute({
     loader: async () => {
@@ -73,6 +74,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                             "
                         />
                         <SiteNav />
+                        <ChatBubble />
                         <main className="max-w-dvw px-2 overflow-hidden">
                             <div className="md:max-w-3xl mx-auto">
                                 <DitheredBackground />
@@ -86,7 +88,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 </ThemeProvider>
                 <TanStackDevtools
                     config={{
-                        position: "bottom-right",
+                        position: "bottom-left",
                     }}
                     plugins={[
                         {
