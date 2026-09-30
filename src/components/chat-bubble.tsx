@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button.tsx";
 import { Textarea } from "@/components/ui/textarea.tsx";
 import { Message, MessageContent, MessageGroup } from "@/components/ui/message.tsx";
 import { Bubble, BubbleContent } from "@/components/ui/bubble.tsx";
+import { streamResponse } from "@/server/chat"
 
 type ChatMessage = {
     id: string;
@@ -18,8 +19,9 @@ const GREETING: ChatMessage = {
 };
 
 async function getReply(_messages: Array<ChatMessage>): Promise<string> {
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    return "Thanks for the message! Chat isn't hooked up yet.";
+    return streamResponse({
+        data: { messages: _messages.filter((m) => m.id !== "greeting").map(({ role, content }) => ({ role, content })) },
+    })
 }
 
 export function ChatBubble() {
