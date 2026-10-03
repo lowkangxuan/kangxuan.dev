@@ -1,0 +1,7 @@
+{
+    // Nitro merges this into the generated Cloudflare deployment configuration.
+    // Store KAI_API_KEY as a Secret in the Cloudflare dashboard.
+    "vars": {
+        "KAI_API_URL": "https://kai-lac-one.vercel.app"
+    }
+}
