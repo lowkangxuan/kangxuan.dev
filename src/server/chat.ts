@@ -8,17 +8,12 @@ const MessageSchema = z.object({
 
 export const streamResponse = createServerFn({ method: "POST" })
     .inputValidator(z.object({ messages: z.array(MessageSchema).min(1) }))
-    .handler(async function* ({ data }) {
+    .handler(async ({ data }) => {
         const url = process.env.KAI_API_URL
         const key = process.env.KAI_API_KEY
 
-        if (!url) {
-            throw Error("KAI url is missing from the environment variable!")
-        }
-
-        if (!key) {
-            throw Error("KAI api key is missing from the environment variable!")
-        }
+        if (!url) throw Error("KAI url is missing from the environment variable!");
+        if (!key) throw Error("KAI api key is missing from the environment variable!");
 
         const result = await fetch(`${url}/query`, {
             method: "POST",
@@ -26,7 +21,7 @@ export const streamResponse = createServerFn({ method: "POST" })
             body: JSON.stringify({ messages: data.messages }),
         })
         if (!result.ok || !result.body) throw new Error(`KAI API error ${result.status}: ${await result.text()}`)
-        yield* readDeltas(result.body)
+        return readDeltas(result.body)
     })
 
 // KAI replies with server-sent events: `delta` carries a JSON-encoded text chunk, `done` ends the reply
