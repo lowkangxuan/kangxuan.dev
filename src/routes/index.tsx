@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Await, createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { Experience } from "@/features/home/experience";
@@ -8,14 +8,9 @@ import { GithubActivity } from "@/features/home/github-activity.tsx";
 import { BlogSection } from "@/features/home/blog-section.tsx";
 import { Skills } from "@/features/home/stack";
 import { ProjectsSection } from "@/features/home/projects-section.tsx";
+import { Activity } from "react-activity-calendar";
 
-type Activity = {
-    date: string
-    count: number
-    level: 0 | 1 | 2 | 3 | 4
-}
-
-export type ApiResponse = {
+type ApiResponse = {
     total: {
         [year: number]: number
         [year: string]: number // 'lastYear;
@@ -43,23 +38,28 @@ const getGithubActivity = createServerFn({ method: "GET" })
     })
 
 export const Route = createFileRoute("/")({
-    loader: async () => {
-        return {
-            contributions: await getGithubActivity({ data: { username: 'lowkangxuan', year: 'last' } })
-        }
-    },
+    loader: () => ({
+        activityData: getGithubActivity({
+            data: { username: 'lowkangxuan', year: 'last' }
+        }),
+    }),
     component: App,
 });
 
 function App() {
-    const { contributions } = Route.useLoaderData();
+    const { activityData } = Route.useLoaderData();
 
     return (
         <div>
             <Profile />
             <Separator />
 
-            <GithubActivity data={contributions} />
+            <Await
+                promise={activityData}
+                fallback={<GithubActivity loading />}
+            >
+                {(activityData) => <GithubActivity contributions={activityData.contributions} />}
+            </Await>
             <Separator />
 
             <Skills />
