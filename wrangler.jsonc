@@ -3,6 +3,6 @@
     // Store KAI_API_KEY as a Secret in the Cloudflare dashboard.
     "name": "kangxuan-dev",
     "vars": {
-        "KAI_API_URL": "https://kai-lac-one.vercel.app"
+        "KAI_API_URL": "https://kai-production-44b0.up.railway.app"
     }
 }
