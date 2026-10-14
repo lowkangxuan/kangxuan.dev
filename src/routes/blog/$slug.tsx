@@ -116,7 +116,7 @@ function PostPage() {
                             </ul>
                         </header>
 
-                        <MDX content={page.mdx} />
+                        <MDX content={page.body} />
                     </PanelSection>
                 </article>
             </Panel>

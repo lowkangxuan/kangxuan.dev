@@ -1,9 +1,12 @@
-import { MDXContent } from "@content-collections/mdx/react";
+import { toJsxRuntime } from "hast-util-to-jsx-runtime";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
+import type { Root } from "hast";
+import type { Components } from "hast-util-to-jsx-runtime";
 import type { ComponentPropsWithoutRef } from "react";
 import { CodeBlock } from "@/components/code-block.tsx";
 import { cn } from "@/lib/utils.ts";
 
-const components = {
+const components: Partial<Components> = {
     h1: ({ className, ...props }: ComponentPropsWithoutRef<"h1">) => (
         <h1
             className={cn(
@@ -90,6 +93,8 @@ const components = {
     ),
 };
 
+// `content` is the JSON HAST tree compiled in content-collections.ts.
 export function MDX({ content }: { content: string }) {
-    return <MDXContent code={content} components={components} />;
+    const tree = JSON.parse(content) as Root;
+    return toJsxRuntime(tree, { Fragment, jsx, jsxs, components });
 }
