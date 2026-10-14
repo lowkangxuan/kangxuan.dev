@@ -24,7 +24,7 @@ const ActivitySchema = z.object({
 })
 
 const getGithubActivity = createServerFn({ method: "GET" })
-    .inputValidator(ActivitySchema)
+    .validator(ActivitySchema)
     .handler(async ({ data }) => {
         const apiUrl = 'https://github-contributions-api.jogruber.de/v4/';
         const response = await fetch(`${apiUrl}${data.username}?y=${String(data.year)}`);

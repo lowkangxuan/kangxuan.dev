@@ -3,11 +3,11 @@ import fs from "node:fs/promises";
 import { defineConfig  } from "vite";
 import { devtools } from "@tanstack/devtools-vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
-import viteReact from "@vitejs/plugin-react";
-import viteTsConfigPaths from "vite-tsconfig-paths";
+import viteReact, { reactCompilerPreset } from "@vitejs/plugin-react";
+import babel from "@rolldown/plugin-babel";
 import tailwindcss from "@tailwindcss/vite";
 import contentCollections from "@content-collections/vite";
-import { nitro } from "nitro/vite";
+import { cloudflare } from "@cloudflare/vite-plugin";
 import type {Plugin} from "vite";
 
 const BLOG_ASSET_EXT_RE = /\.(png|jpe?g|gif|webp|svg|avif|bmp|tiff?)$/i;
@@ -104,27 +104,23 @@ function copyBlogAssets(): Plugin {
 const config = defineConfig({
     optimizeDeps: {
         include: [
-            "@tanstack/router-devtools",
             "@tanstack/router-devtools-core",
             "@tanstack/react-router",
         ],
     },
+    resolve: {
+        // enables the tsconfig path aliases
+        tsconfigPaths: true,
+    },
     plugins: [
         devtools(),
-        nitro(),
+        cloudflare({ viteEnvironment: { name: "ssr" } }),
         copyBlogAssets(),
-        // this is the plugin that enables path aliases
-        viteTsConfigPaths({
-            projects: ["./tsconfig.json"],
-        }),
         tailwindcss(),
         tanstackStart(),
         contentCollections(),
-        viteReact({
-            babel: {
-                plugins: ["babel-plugin-react-compiler"],
-            },
-        }),
+        viteReact(),
+        babel({ presets: [reactCompilerPreset()] }),
     ],
 });
 

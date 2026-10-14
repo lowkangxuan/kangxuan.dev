@@ -7,7 +7,7 @@ const MessageSchema = z.object({
 })
 
 export const streamResponse = createServerFn({ method: "POST" })
-    .inputValidator(z.object({ messages: z.array(MessageSchema).min(1) }))
+    .validator(z.object({ messages: z.array(MessageSchema).min(1) }))
     .handler(async ({ data }) => {
         const url = process.env.KAI_API_URL
         const key = process.env.KAI_API_KEY
