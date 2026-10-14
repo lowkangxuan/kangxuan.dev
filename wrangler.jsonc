@@ -3,9 +3,16 @@
     "$schema": "node_modules/wrangler/config-schema.json",
     "name": "kangxuan-dev",
     "compatibility_date": "2026-10-04",
-    "compatibility_flags": ["nodejs_compat"],
+    "compatibility_flags": [
+        "nodejs_compat"
+    ],
     "main": "@tanstack/react-start/server-entry",
     "vars": {
         "KAI_API_URL": "https://kai-production-44b0.up.railway.app"
-    }
+    },
+    "previews": {
+        "vars": {
+            "KAI_API_URL": "https://kai-production-44b0.up.railway.app"
+        },
+    },
 }
